@@ -8,7 +8,7 @@
   <div class="container">
     <span class="section-eyebrow">{% trans "Room Details" %}</span>
     <h1>{{ room_type.name }}</h1>
-    <p class="price-lg">{% trans "From" %} {{ room_type.base_price|floatformat:0 }} UZS / {% trans "night" %}</p>
+    <p class="price-lg">{% trans "From" %} {{ room_type.base_price|floatformat:0 }} {{ site_settings.currency_label }} / {% trans "night" %}</p>
   </div>
 </section>
 
@@ -62,7 +62,7 @@
           {% endwith %}
         </div>
         <div class="room-card-body">
-          <span class="price-badge">{% trans "From" %} {{ rt.base_price|floatformat:0 }} UZS</span>
+          <span class="price-badge">{% trans "From" %} {{ rt.base_price|floatformat:0 }} {{ site_settings.currency_label }}</span>
           <h3>{{ rt.name }}</h3>
           <p>{{ rt.description|truncatewords:12 }}</p>
         </div>

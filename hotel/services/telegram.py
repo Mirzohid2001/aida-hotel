@@ -17,6 +17,7 @@ def format_booking_notification(booking: Booking) -> str:
     room_labels = ", ".join(f"{br.room.number} ({br.room.room_type.name})" for br in rooms)
     nights = (booking.check_out - booking.check_in).days
     total = number_format(booking.estimated_total, force_grouping=True)
+    currency = SiteSettings.load().currency_label
 
     lines = [
         f"<b>{_('New booking')}</b>",
@@ -30,7 +31,7 @@ def format_booking_notification(booking: Booking) -> str:
         f"<b>{_('Check-out')}:</b> {date_format(booking.check_out, 'DATE_FORMAT')}",
         f"<b>{_('Nights')}:</b> {nights}",
         f"<b>{_('Rooms')}:</b> {room_labels or '—'}",
-        f"<b>{_('Total')}:</b> {total} UZS",
+        f"<b>{_('Total')}:</b> {total} {currency}",
     ]
 
     if booking.special_requests.strip():

@@ -132,6 +132,10 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# Uploads: allow larger phone photos; they are compressed on save
+DATA_UPLOAD_MAX_MEMORY_SIZE = 25 * 1024 * 1024
+FILE_UPLOAD_MAX_MEMORY_SIZE = 25 * 1024 * 1024
+
 CKEDITOR_5_CONFIGS = {
     "default": {
         "toolbar": [
@@ -206,7 +210,7 @@ JAZZMIN_SETTINGS = {
     "default_icon_children": "fas fa-circle",
     "related_modal_active": True,
     "custom_css": "admin/css/aida_admin.css",
-    "custom_js": None,
+    "custom_js": "admin/js/aida_image_compress.js",
     "use_google_fonts_cdn": True,
     "show_ui_builder": False,
     "changeform_format": "horizontal_tabs",

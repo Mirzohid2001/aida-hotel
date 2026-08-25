@@ -106,7 +106,7 @@
           {% endwith %}
         </div>
         <div class="room-card-body">
-          <span class="price-badge">{% trans "From" %} {{ rt.base_price|floatformat:0 }} UZS</span>
+          <span class="price-badge">{% trans "From" %} {{ rt.base_price|floatformat:0 }} {{ site_settings.currency_label }}</span>
           <h3>{{ rt.name }}</h3>
           <p>{{ rt.description|truncatewords:15 }}</p>
         </div>

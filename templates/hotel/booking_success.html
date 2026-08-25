@@ -22,7 +22,7 @@
         <dt>{% trans "Guest" %}</dt><dd>{{ booking.guest_name }}</dd>
         <dt>{% trans "Check-in" %}</dt><dd>{{ booking.check_in }}</dd>
         <dt>{% trans "Check-out" %}</dt><dd>{{ booking.check_out }}</dd>
-        <dt>{% trans "Estimated total" %}</dt><dd>{{ booking.estimated_total|floatformat:0 }} UZS</dd>
+        <dt>{% trans "Estimated total" %}</dt><dd>{{ booking.estimated_total|floatformat:0 }} {{ site_settings.currency_label }}</dd>
         <dt>{% trans "Status" %}</dt><dd>{{ booking.get_status_display }}</dd>
       </dl>
       <div class="success-actions">

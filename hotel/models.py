@@ -5,6 +5,8 @@ from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
+from hotel.utils import OptimizeImagesMixin
+
 
 class TimeStampedModel(models.Model):
     created_at = models.DateTimeField(_("Created at"), auto_now_add=True)
@@ -14,13 +16,28 @@ class TimeStampedModel(models.Model):
         abstract = True
 
 
-class SiteSettings(models.Model):
+class SiteSettings(OptimizeImagesMixin, models.Model):
+    class Currency(models.TextChoices):
+        UZS = "UZS", _("UZS (so'm)")
+        USD = "USD", _("USD ($)")
+
+    image_optimize_fields = ("logo", "og_image")
+    image_max_side = 1200
+    image_quality = 85
+
     site_name = models.CharField(_("Site name"), max_length=120, default="Aida Hotel")
     tagline = models.CharField(_("Tagline"), max_length=255, blank=True)
     logo = models.ImageField(_("Logo"), upload_to="site/", blank=True, null=True)
     phone = models.CharField(_("Phone"), max_length=32, blank=True)
     email = models.EmailField(_("Email"), blank=True)
     address = models.TextField(_("Address"), blank=True)
+    currency = models.CharField(
+        _("Currency"),
+        max_length=3,
+        choices=Currency.choices,
+        default=Currency.UZS,
+        help_text=_("Shown next to all room prices on the website and in admin."),
+    )
     check_in_time = models.CharField(_("Check-in time"), max_length=16, default="14:00")
     check_out_time = models.CharField(_("Check-out time"), max_length=16, default="12:00")
     map_latitude = models.DecimalField(
@@ -62,6 +79,12 @@ class SiteSettings(models.Model):
     def __str__(self):
         return self.site_name
 
+    @property
+    def currency_label(self):
+        if self.currency == self.Currency.USD:
+            return "$"
+        return "UZS"
+
     def save(self, *args, **kwargs):
         self.pk = 1
         super().save(*args, **kwargs)
@@ -72,10 +95,16 @@ class SiteSettings(models.Model):
         return obj
 
 
-class HeroSlide(models.Model):
+class HeroSlide(OptimizeImagesMixin, models.Model):
+    image_optimize_fields = ("image",)
+
     title = models.CharField(_("Title"), max_length=200)
     subtitle = models.CharField(_("Subtitle"), max_length=255, blank=True)
-    image = models.ImageField(_("Image"), upload_to="hero/")
+    image = models.ImageField(
+        _("Image"),
+        upload_to="hero/",
+        help_text=_("Large photos are auto-resized (max ~1920px) to speed up upload."),
+    )
     cta_text = models.CharField(_("CTA text"), max_length=64, blank=True)
     cta_url = models.CharField(_("CTA URL"), max_length=255, blank=True, default="/book/")
     ordering = models.PositiveIntegerField(_("Ordering"), default=0)
@@ -90,7 +119,9 @@ class HeroSlide(models.Model):
         return self.title
 
 
-class AboutSection(models.Model):
+class AboutSection(OptimizeImagesMixin, models.Model):
+    image_optimize_fields = ("image",)
+
     title = models.CharField(_("Title"), max_length=200)
     content = models.TextField(_("Content"))
     image = models.ImageField(_("Image"), upload_to="about/", blank=True, null=True)
@@ -128,9 +159,15 @@ class Amenity(models.Model):
         return self.name
 
 
-class GalleryImage(models.Model):
+class GalleryImage(OptimizeImagesMixin, models.Model):
+    image_optimize_fields = ("image",)
+
     title = models.CharField(_("Title"), max_length=200, blank=True)
-    image = models.ImageField(_("Image"), upload_to="gallery/")
+    image = models.ImageField(
+        _("Image"),
+        upload_to="gallery/",
+        help_text=_("Large photos are auto-resized (max ~1920px) to speed up upload."),
+    )
     caption = models.CharField(_("Caption"), max_length=255, blank=True)
     ordering = models.PositiveIntegerField(_("Ordering"), default=0)
     is_active = models.BooleanField(_("Active"), default=True)
@@ -263,7 +300,12 @@ class RoomType(models.Model):
     name = models.CharField(_("Name"), max_length=120)
     slug = models.SlugField(_("Slug"), unique=True)
     description = models.TextField(_("Description"), blank=True)
-    base_price = models.DecimalField(_("Base price"), max_digits=10, decimal_places=2)
+    base_price = models.DecimalField(
+        _("Base price"),
+        max_digits=10,
+        decimal_places=2,
+        help_text=_("Per night. Currency is set in Site settings (UZS or USD)."),
+    )
     capacity = models.PositiveSmallIntegerField(_("Capacity"), default=2)
     size_sqm = models.PositiveSmallIntegerField(_("Size (m²)"), null=True, blank=True)
     is_active = models.BooleanField(_("Active"), default=True)
@@ -304,14 +346,20 @@ class Room(models.Model):
         return f"{self.number} ({self.room_type.name})"
 
 
-class RoomImage(models.Model):
+class RoomImage(OptimizeImagesMixin, models.Model):
+    image_optimize_fields = ("image",)
+
     room_type = models.ForeignKey(
         RoomType,
         on_delete=models.CASCADE,
         related_name="images",
         verbose_name=_("Room type"),
     )
-    image = models.ImageField(_("Image"), upload_to="rooms/")
+    image = models.ImageField(
+        _("Image"),
+        upload_to="rooms/",
+        help_text=_("Large photos are auto-resized (max ~1920px) to speed up upload."),
+    )
     caption = models.CharField(_("Caption"), max_length=255, blank=True)
     ordering = models.PositiveIntegerField(_("Ordering"), default=0)
     is_primary = models.BooleanField(_("Primary"), default=False)
@@ -334,7 +382,12 @@ class SeasonalPrice(models.Model):
     )
     start_date = models.DateField(_("Start date"))
     end_date = models.DateField(_("End date"))
-    price = models.DecimalField(_("Price"), max_digits=10, decimal_places=2)
+    price = models.DecimalField(
+        _("Price"),
+        max_digits=10,
+        decimal_places=2,
+        help_text=_("Per night. Uses the currency from Site settings."),
+    )
 
     class Meta:
         ordering = ["start_date"]

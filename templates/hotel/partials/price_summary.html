@@ -3,6 +3,6 @@
 <div class="price-summary-card">
   <h4>{% trans "Price Summary" %}</h4>
   <p>{% blocktrans with count=selected_count nights=nights %} {{ count }} room(s) × {{ nights }} night(s){% endblocktrans %}</p>
-  <p class="price-total"><strong>{% trans "Total" %}:</strong> {{ total }} UZS</p>
+  <p class="price-total"><strong>{% trans "Total" %}:</strong> {{ total }} {{ site_settings.currency_label }}</p>
 </div>
 {% endif %}

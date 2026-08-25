@@ -21,7 +21,7 @@
           {% with img=rt.images.all|first %}
             {% if img %}<img src="{{ img.image.url }}" alt="{{ rt.name }}" loading="lazy">{% else %}<div class="room-placeholder"></div>{% endif %}
           {% endwith %}
-          <span class="price-badge">{% trans "From" %} {{ rt.base_price|floatformat:0 }} UZS</span>
+          <span class="price-badge">{% trans "From" %} {{ rt.base_price|floatformat:0 }} {{ site_settings.currency_label }}</span>
         </div>
         <div class="room-card-body">
           <h2>{{ rt.name }}</h2>

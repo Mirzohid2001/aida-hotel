@@ -92,6 +92,15 @@ class SiteSettingsAdmin(SingletonAdmin):
             {"fields": ("phone", "email", "address")},
         ),
         (
+            _("Pricing"),
+            {
+                "fields": ("currency",),
+                "description": _(
+                    "Choose UZS or USD ($). This label is shown on all room prices."
+                ),
+            },
+        ),
+        (
             _("Hours"),
             {"fields": ("check_in_time", "check_out_time")},
         ),
@@ -339,7 +348,7 @@ class BlockedDateInline(admin.TabularInline):
 class RoomTypeAdmin(admin.ModelAdmin):
     list_display = (
         "name",
-        "base_price",
+        "base_price_display",
         "capacity",
         "room_count",
         "is_active",
@@ -353,9 +362,23 @@ class RoomTypeAdmin(admin.ModelAdmin):
     inlines = [RoomInline, RoomImageInline, SeasonalPriceInline]
     fieldsets = (
         (None, {"fields": ("name", "slug", "description")}),
-        (_("Pricing & capacity"), {"fields": ("base_price", "capacity", "size_sqm")}),
+        (
+            _("Pricing & capacity"),
+            {
+                "fields": ("base_price", "capacity", "size_sqm"),
+                "description": _(
+                    "Enter the nightly price as a number. Set UZS or USD ($) under "
+                    "Site settings → Pricing."
+                ),
+            },
+        ),
         (_("Display"), {"fields": ("ordering", "is_active")}),
     )
+
+    @admin.display(description=_("Base price"), ordering="base_price")
+    def base_price_display(self, obj):
+        label = SiteSettings.load().currency_label
+        return f"{obj.base_price} {label}"
 
     @admin.display(description=_("Rooms"))
     def room_count(self, obj):
