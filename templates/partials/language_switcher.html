@@ -1,0 +1,15 @@
+{% load i18n %}
+{% get_current_language as CURRENT_LANG %}
+{% get_available_languages as LANGUAGES_LIST %}
+<div class="lang-switcher" role="group" aria-label="{% trans 'Language' %}">
+  {% for lang_code, lang_name in LANGUAGES_LIST %}
+    <a href="{% url 'switch_language' lang_code %}?next={{ request.get_full_path|urlencode }}"
+       class="lang-btn{% if lang_code == CURRENT_LANG %} active{% endif %}"
+       hreflang="{{ lang_code }}"
+       lang="{{ lang_code }}"
+       title="{{ lang_name }}"
+       {% if lang_code == CURRENT_LANG %}aria-current="true" tabindex="-1"{% endif %}>
+      {{ lang_code|upper }}
+    </a>
+  {% endfor %}
+</div>

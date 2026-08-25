@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Rooms" %} — {{ site_settings.site_name }}{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <span class="section-eyebrow">{% trans "Accommodations" %}</span>
+    <h1>{% trans "Our Rooms & Suites" %}</h1>
+    <p>{% trans "Choose the perfect room for your stay." %}</p>
+  </div>
+</section>
+
+<section class="section section--white reveal">
+  <div class="container">
+    <div class="card-grid">
+      {% for rt in room_types %}
+      <article class="room-card room-card--list">
+        <div class="room-card-media">
+          {% with img=rt.images.all|first %}
+            {% if img %}<img src="{{ img.image.url }}" alt="{{ rt.name }}" loading="lazy">{% else %}<div class="room-placeholder"></div>{% endif %}
+          {% endwith %}
+          <span class="price-badge">{% trans "From" %} {{ rt.base_price|floatformat:0 }} UZS</span>
+        </div>
+        <div class="room-card-body">
+          <h2>{{ rt.name }}</h2>
+          <p>{{ rt.description|truncatewords:30 }}</p>
+          <ul class="room-meta">
+            <li>{% trans "Capacity" %}: {{ rt.capacity }}</li>
+            {% if rt.size_sqm %}<li>{{ rt.size_sqm }} m²</li>{% endif %}
+            <li>{% blocktrans count counter=rt.rooms.count %}{{ counter }} room{% plural %}{{ counter }} rooms{% endblocktrans %}</li>
+          </ul>
+          <div class="card-actions">
+            <a href="{% url 'hotel:room_detail' rt.slug %}" class="btn btn-outline">{% trans "Details" %}</a>
+            <a href="{% url 'hotel:book' %}?room_type={{ rt.slug }}" class="btn btn-gold">{% trans "Book" %}</a>
+          </div>
+        </div>
+      </article>
+      {% empty %}
+      <div class="empty-state">
+        <span class="room-grid-empty-icon" aria-hidden="true">◫</span>
+        <p>{% trans "No rooms available at the moment." %}</p>
+        <a href="{% url 'hotel:contact' %}" class="btn btn-outline">{% trans "Contact Us" %}</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

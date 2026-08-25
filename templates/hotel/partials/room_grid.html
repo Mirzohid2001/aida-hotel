@@ -1,0 +1,29 @@
+{% load i18n %}
+{% if error %}
+<div class="room-grid-empty room-grid-empty--error">
+  <span class="room-grid-empty-icon" aria-hidden="true">!</span>
+  <p>{{ error }}</p>
+</div>
+{% elif rooms %}
+<div class="room-select-header">
+  <h3>{% trans "Available Rooms" %} — {{ room_type.name }}</h3>
+  <p class="hint">{% blocktrans with nights=nights %}Stay: {{ nights }} night(s){% endblocktrans %}</p>
+</div>
+<div class="room-select-grid">
+  {% for item in rooms %}
+  <label class="room-select-card{% if not item.available %} disabled{% endif %}{% if item.available %}{% endif %}">
+    <input type="checkbox" class="room-checkbox" value="{{ item.room.pk }}" {% if not item.available %}disabled{% endif %}>
+    <span class="room-number">{% trans "Room" %} {{ item.room.number }}</span>
+    <span class="badge badge-{{ item.status_label }}">
+      {% if item.available %}{% trans "Available" %}{% else %}{% trans "Occupied" %}{% endif %}
+    </span>
+    <span class="room-floor">{% trans "Floor" %} {{ item.room.floor }}</span>
+  </label>
+  {% endfor %}
+</div>
+{% else %}
+<div class="room-grid-empty">
+  <span class="room-grid-empty-icon" aria-hidden="true">◫</span>
+  <p>{% trans "No rooms found for this type." %}</p>
+</div>
+{% endif %}

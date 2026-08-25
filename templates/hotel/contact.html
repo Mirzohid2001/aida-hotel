@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Contact" %} — {{ site_settings.site_name }}{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <span class="section-eyebrow">{% trans "Get in Touch" %}</span>
+    <h1>{% trans "Contact Us" %}</h1>
+    <p>{% trans "We would love to hear from you." %}</p>
+  </div>
+</section>
+
+<section class="section section--white reveal">
+  <div class="container split-grid">
+    <div>
+      <div class="section-header" style="text-align:left;margin-left:0;margin-bottom:2rem;">
+        <span class="section-eyebrow">{% trans "Reach Us" %}</span>
+        <h2>{% trans "We're Here to Help" %}</h2>
+      </div>
+      <div class="contact-info">
+        {% if site_settings.phone %}
+        <div class="contact-info-item">
+          <strong>{% trans "Phone" %}</strong>
+          <p><a href="tel:{{ site_settings.phone }}">{{ site_settings.phone }}</a></p>
+        </div>
+        {% endif %}
+        {% if site_settings.email %}
+        <div class="contact-info-item">
+          <strong>{% trans "Email" %}</strong>
+          <p><a href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a></p>
+        </div>
+        {% endif %}
+        {% if site_settings.address %}
+        <div class="contact-info-item">
+          <strong>{% trans "Address" %}</strong>
+          <p>{{ site_settings.address }}</p>
+        </div>
+        {% endif %}
+        <div class="contact-info-item">
+          <strong>{% trans "Hours" %}</strong>
+          <p>{% trans "Check-in" %}: {{ site_settings.check_in_time }} · {% trans "Check-out" %}: {{ site_settings.check_out_time }}</p>
+        </div>
+      </div>
+    </div>
+    <form method="post" class="contact-form" data-js-contact>
+      {% csrf_token %}
+      {% for field in form.visible_fields %}
+      <div class="form-group">
+        {{ field.label_tag }} {{ field }}
+        {% if field.errors %}<span class="field-error">{{ field.errors }}</span>{% endif %}
+      </div>
+      {% endfor %}
+      {{ form.website }}
+      <button type="submit" class="btn btn-gold btn-lg" data-submit-btn>{% trans "Send Message" %}</button>
+    </form>
+  </div>
+</section>
+
+{% if site_settings.map_latitude and site_settings.map_longitude %}
+<section class="section reveal">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">{% trans "Location" %}</span>
+      <h2>{% trans "Find Us in Bukhara" %}</h2>
+    </div>
+    <div class="map-embed">
+      <iframe
+        title="{% trans 'Aida Hotel on map' %}"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://maps.google.com/maps?q={{ site_settings.map_latitude }},{{ site_settings.map_longitude }}&amp;hl={{ LANGUAGE_CODE|default:'uz' }}&amp;z=17&amp;output=embed">
+      </iframe>
+    </div>
+    <p class="text-center mt-lg">
+      <a href="https://www.google.com/maps/place/Aida+Hotel/@{{ site_settings.map_latitude }},{{ site_settings.map_longitude }},17z"
+         class="btn btn-outline"
+         target="_blank"
+         rel="noopener noreferrer">
+        {% trans "Open in Google Maps" %}
+      </a>
+    </p>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

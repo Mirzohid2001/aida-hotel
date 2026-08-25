@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}{{ site_settings.site_name }} — {% trans "Luxury Stay" %}{% endblock %}
+{% block body_class %}page-home{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-slider">
+    {% if hero_slides %}
+      {% for slide in hero_slides %}
+      <div class="hero-slide{% if forloop.first %} active hero-slide--portrait{% endif %}">
+        {% if slide.image %}<img src="{{ slide.image.url }}" alt="{{ slide.title }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"{% if forloop.first %} fetchpriority="high"{% endif %}>{% endif %}
+        <div class="hero-content container">
+          <span class="hero-eyebrow">{% trans "Bukhara" %}</span>
+          <h1>{{ slide.subtitle|default:slide.title }}</h1>
+          <div class="hero-actions">
+            {% if slide.cta_text %}<a href="{{ slide.cta_url }}" class="btn btn-gold btn-lg">{{ slide.cta_text }}</a>{% endif %}
+            <a href="{% url 'hotel:rooms' %}" class="btn btn-outline-light btn-lg">{% trans "View Details" %}</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% if hero_slides|length > 1 %}
+      <div class="hero-dots" role="tablist" aria-label="{% trans 'Hero slides' %}">
+        {% for slide in hero_slides %}
+        <button type="button" class="hero-dot{% if forloop.first %} active{% endif %}" aria-label="{% trans 'Slide' %} {{ forloop.counter }}"></button>
+        {% endfor %}
+      </div>
+      {% endif %}
+    {% else %}
+      <div class="hero-slide active hero-slide--portrait">
+        <img src="{% static 'images/hero/aida-courtyard.png' %}" alt="{{ site_settings.site_name }}" loading="eager" fetchpriority="high">
+        <div class="hero-content container">
+          <span class="hero-eyebrow">{% trans "Bukhara" %}</span>
+          <h1>{{ site_settings.tagline|default:site_settings.site_name }}</h1>
+          <div class="hero-actions">
+            <a href="{% url 'hotel:book' %}" class="btn btn-gold btn-lg">{% trans "Book Your Stay" %}</a>
+            <a href="#rooms" class="btn btn-outline-light btn-lg">{% trans "Explore Rooms" %}</a>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    <div class="scroll-indicator" aria-hidden="true">{% trans "Scroll" %}</div>
+  </div>
+
+  <div class="hero-booking">
+    <div class="container hero-booking-inner">
+      <div class="hero-booking-text">
+        {% trans "Plan Your Stay" %}
+        <small>{% trans "Check-in" %} {{ site_settings.check_in_time }} · {% trans "Check-out" %} {{ site_settings.check_out_time }}</small>
+      </div>
+      <a href="{% url 'hotel:book' %}" class="btn btn-gold btn-lg">{% trans "Check Availability" %}</a>
+    </div>
+  </div>
+</section>
+
+{% if stats %}
+<section class="stats-section">
+  <div class="container--narrow" style="width:100%;max-width:none;padding:0;">
+    <div class="stats-grid">
+      {% for stat in stats %}
+      <div class="stat-card reveal">
+        <span class="stat-value" data-stat-value="{{ stat.value }}">{{ stat.value }}</span>
+        <span class="stat-label">{{ stat.label }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="section reveal">
+  <div class="container split-grid">
+    <div>
+      <div class="section-divider"><span class="section-eyebrow">{% trans "Our Story" %}</span></div>
+      <h2>{{ about.title }}</h2>
+      <div class="prose">{{ about.content|linebreaks }}</div>
+    </div>
+    {% if about.image %}
+    <div class="about-image reveal reveal-delay-2">
+      <img src="{{ about.image.url }}" alt="{{ about.title }}" loading="lazy">
+    </div>
+    {% else %}
+    <div class="about-image reveal reveal-delay-2">
+      <div class="room-placeholder" style="width:100%;aspect-ratio:4/5;"></div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% if room_types %}
+<section id="rooms" class="section section--white reveal">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">{% trans "Accommodations" %}</span>
+      <h2>{% trans "Our Rooms" %}</h2>
+      <p>{% trans "Elegantly appointed spaces designed for comfort and refinement." %}</p>
+    </div>
+    <div class="card-grid">
+      {% for rt in room_types %}
+      <a href="{% url 'hotel:room_detail' rt.slug %}" class="room-card">
+        <div class="room-card-media">
+          {% with img=rt.images.all|first %}
+            {% if img %}<img src="{{ img.image.url }}" alt="{{ rt.name }}" loading="lazy">{% else %}<div class="room-placeholder"></div>{% endif %}
+          {% endwith %}
+        </div>
+        <div class="room-card-body">
+          <span class="price-badge">{% trans "From" %} {{ rt.base_price|floatformat:0 }} UZS</span>
+          <h3>{{ rt.name }}</h3>
+          <p>{{ rt.description|truncatewords:15 }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-lg">
+      <a href="{% url 'hotel:rooms' %}" class="btn btn-outline btn-lg">{% trans "View All Rooms" %}</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if amenities %}
+<section class="section reveal">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">{% trans "Experience" %}</span>
+      <h2>{% trans "Amenities" %}</h2>
+    </div>
+    <div class="amenities-grid">
+      {% for amenity in amenities %}
+      <div class="amenity-card">
+        {% if amenity.icon %}{% include "partials/amenity_icon.html" with key=amenity.icon %}{% endif %}
+        <h3>{{ amenity.name }}</h3>
+        <p>{{ amenity.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if gallery %}
+<section id="gallery" class="section section--white reveal">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">{% trans "Visual Journey" %}</span>
+      <h2>{% trans "Gallery" %}</h2>
+    </div>
+    <div class="gallery-grid">
+      {% for item in gallery %}
+      <figure class="gallery-item"
+              data-lightbox
+              data-lightbox-src="{% if item.image %}{{ item.image.url }}{% endif %}"
+              data-lightbox-caption="{{ item.caption|default:item.title }}"
+              tabindex="0"
+              role="button"
+              aria-label="{{ item.title }}">
+        {% if item.image %}<img src="{{ item.image.url }}" alt="{{ item.title }}" loading="lazy">{% else %}<div class="room-placeholder" style="width:100%;height:100%;"></div>{% endif %}
+        {% if item.caption %}<figcaption>{{ item.caption }}</figcaption>{% endif %}
+      </figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if testimonials %}
+<section class="section section--dark reveal">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">{% trans "Testimonials" %}</span>
+      <h2>{% trans "Guest Reviews" %}</h2>
+      <p>{% trans "What our distinguished guests say about their stay." %}</p>
+    </div>
+    <div class="testimonials-grid">
+      {% for t in testimonials %}
+      <blockquote class="testimonial-card">
+        <div class="testimonial-stars" aria-label="{% trans 'Rating' %}: {{ t.rating }}/5">
+          {% for i in "12345" %}{% if forloop.counter <= t.rating %}&#9733;{% else %}&#9734;{% endif %}{% endfor %}
+        </div>
+        <p>"{{ t.content }}"</p>
+        <footer>{{ t.guest_name }}</footer>
+      </blockquote>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if nearby_places %}
+<section class="section reveal">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">{% trans "Location" %}</span>
+      <h2>{% trans "Nearby" %}</h2>
+    </div>
+    <ul class="nearby-list">
+      {% for place in nearby_places %}
+      <li>
+        <strong>{{ place.name }}</strong>
+        {% if place.distance %}<span>{{ place.distance }}</span>{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+{% if faqs %}
+<section id="faq" class="section section--white reveal">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">{% trans "Questions" %}</span>
+      <h2>{% trans "FAQ" %}</h2>
+    </div>
+    <div class="faq-list">
+      {% for faq in faqs %}
+      <details class="faq-item">
+        <summary>{{ faq.question }}</summary>
+        <p>{{ faq.answer }}</p>
+      </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="section cta-section cta-section--photo reveal">
+  <div class="container">
+    <span class="section-eyebrow">{% trans "Reservations" %}</span>
+    <h2>{% trans "Ready for an unforgettable stay?" %}</h2>
+    <a href="{% url 'hotel:book' %}" class="btn btn-gold btn-lg">{% trans "Book Now" %}</a>
+  </div>
+</section>
+{% endblock %}

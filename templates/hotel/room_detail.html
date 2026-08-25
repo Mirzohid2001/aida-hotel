@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ room_type.name }} — {{ site_settings.site_name }}{% endblock %}
+
+{% block content %}
+<section class="page-hero page-hero--compact">
+  <div class="container">
+    <span class="section-eyebrow">{% trans "Room Details" %}</span>
+    <h1>{{ room_type.name }}</h1>
+    <p class="price-lg">{% trans "From" %} {{ room_type.base_price|floatformat:0 }} UZS / {% trans "night" %}</p>
+  </div>
+</section>
+
+<section class="section section--white reveal">
+  <div class="container split-grid">
+    <div>
+      {% if room_type.images.all %}
+      <div class="room-gallery">
+        {% for img in room_type.images.all %}
+          <figure class="room-gallery-item"
+                  data-lightbox
+                  data-lightbox-src="{{ img.image.url }}"
+                  data-lightbox-caption="{{ img.caption|default:room_type.name }}"
+                  tabindex="0"
+                  role="button">
+            <img src="{{ img.image.url }}" alt="{{ img.caption|default:room_type.name }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+          </figure>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="room-placeholder" style="width:100%;aspect-ratio:16/10;"></div>
+      {% endif %}
+    </div>
+    <div class="room-detail-panel">
+      <span class="section-eyebrow">{% trans "Overview" %}</span>
+      <h2>{% trans "About This Room" %}</h2>
+      <div class="prose">{{ room_type.description|linebreaks }}</div>
+      <ul class="room-detail-meta">
+        <li><span>{% trans "Capacity" %}</span><strong>{{ room_type.capacity }} {% trans "guests" %}</strong></li>
+        {% if room_type.size_sqm %}<li><span>{% trans "Size" %}</span><strong>{{ room_type.size_sqm }} m²</strong></li>{% endif %}
+        <li><span>{% trans "Rooms of this type" %}</span><strong>{{ room_type.rooms.count }}</strong></li>
+      </ul>
+      <a href="{% url 'hotel:book' %}?room_type={{ room_type.slug }}" class="btn btn-gold">{% trans "Book This Room" %}</a>
+    </div>
+  </div>
+</section>
+
+{% if related_room_types %}
+<section class="section reveal">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">{% trans "Accommodations" %}</span>
+      <h2>{% trans "You May Also Like" %}</h2>
+    </div>
+    <div class="card-grid">
+      {% for rt in related_room_types %}
+      <a href="{% url 'hotel:room_detail' rt.slug %}" class="room-card">
+        <div class="room-card-media">
+          {% with img=rt.images.all|first %}
+            {% if img %}<img src="{{ img.image.url }}" alt="{{ rt.name }}" loading="lazy">{% else %}<div class="room-placeholder"></div>{% endif %}
+          {% endwith %}
+        </div>
+        <div class="room-card-body">
+          <span class="price-badge">{% trans "From" %} {{ rt.base_price|floatformat:0 }} UZS</span>
+          <h3>{{ rt.name }}</h3>
+          <p>{{ rt.description|truncatewords:12 }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

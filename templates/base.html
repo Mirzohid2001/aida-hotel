@@ -1,0 +1,144 @@
+{% load i18n static %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ site_settings.meta_title|default:site_settings.site_name }}{% endblock %}</title>
+  {% if site_settings.meta_description %}<meta name="description" content="{{ site_settings.meta_description }}">{% endif %}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{% block og_title %}{{ site_settings.meta_title|default:site_settings.site_name }}{% endblock %}">
+  {% if site_settings.meta_description %}<meta property="og:description" content="{{ site_settings.meta_description }}">{% endif %}
+  {% if site_settings.og_image %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ site_settings.og_image.url }}">{% elif site_settings.logo %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ site_settings.logo.url }}">{% endif %}
+  <link rel="icon" href="/favicon.ico?v=3">
+  <link rel="shortcut icon" href="/favicon.ico?v=3">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/brand/favicon-32.png' %}?v=3">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/brand/favicon-16.png' %}?v=3">
+  <link rel="apple-touch-icon" href="{% static 'images/brand/apple-touch-icon.png' %}?v=3">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  {% if site_settings.google_analytics_id %}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site_settings.google_analytics_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ site_settings.google_analytics_id }}');
+  </script>
+  {% endif %}
+  {% if site_settings.yandex_metrika_id %}
+  <script>
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    ym({{ site_settings.yandex_metrika_id }}, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true});
+  </script>
+  {% endif %}
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}{% if active_promotion %} has-promo-banner{% endif %}">
+  <a href="#main-content" class="skip-link">{% trans "Skip to content" %}</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="{% url 'hotel:home' %}" class="logo logo--has-image">
+        <img src="{% static 'images/brand/aida-logo-header.png' %}" alt="{{ site_settings.site_name }}" class="logo-img" width="176" height="80">
+      </a>
+
+      <nav class="main-nav" aria-label="{% trans 'Main navigation' %}">
+        <a href="{% url 'hotel:home' %}">{% trans "Home" %}</a>
+        <a href="{% url 'hotel:rooms' %}">{% trans "Rooms" %}</a>
+        <a href="{% url 'hotel:book' %}">{% trans "Book" %}</a>
+        <a href="{% url 'hotel:contact' %}">{% trans "Contact" %}</a>
+      </nav>
+
+      <div class="header-actions">
+        {% include "partials/language_switcher.html" %}
+        <a href="{% url 'hotel:book' %}" class="btn btn-gold header-book">{% trans "Book Now" %}</a>
+        <button type="button" class="menu-toggle" aria-label="{% trans 'Open menu' %}" aria-expanded="false" aria-controls="mobile-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav id="mobile-nav" class="mobile-nav" aria-label="{% trans 'Mobile navigation' %}">
+    <a href="{% url 'hotel:home' %}">{% trans "Home" %}</a>
+    <a href="{% url 'hotel:rooms' %}">{% trans "Rooms" %}</a>
+    <a href="{% url 'hotel:book' %}">{% trans "Book" %}</a>
+    <a href="{% url 'hotel:contact' %}">{% trans "Contact" %}</a>
+    <a href="{% url 'hotel:book' %}" class="btn btn-gold">{% trans "Book Now" %}</a>
+    <div class="mobile-lang">{% include "partials/language_switcher.html" %}</div>
+  </nav>
+
+  {% if active_promotion %}
+  <div class="promo-banner">
+    <div class="container">
+      <strong>{{ active_promotion.title }}</strong>
+      {% if active_promotion.discount_label %}<span class="promo-label">{{ active_promotion.discount_label }}</span>{% endif %}
+    </div>
+  </div>
+  {% endif %}
+
+  <main id="main-content">
+    {% if messages %}
+    <div class="container messages">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="{% url 'hotel:home' %}" class="footer-brand">
+          <img src="{% static 'images/brand/aida-mark.png' %}" alt="{{ site_settings.site_name }}" class="footer-logo" width="56" height="56">
+        </a>
+        <h3>{{ site_settings.site_name }}</h3>
+        <p>{{ site_settings.tagline }}</p>
+        {% if site_settings.facebook_url or site_settings.instagram_url or site_settings.telegram_url %}
+        <div class="social-links">
+          {% if site_settings.facebook_url %}<a href="{{ site_settings.facebook_url }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>{% endif %}
+          {% if site_settings.instagram_url %}<a href="{{ site_settings.instagram_url }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>{% endif %}
+          {% if site_settings.telegram_url %}<a href="{{ site_settings.telegram_url }}" target="_blank" rel="noopener noreferrer" aria-label="Telegram">TG</a>{% endif %}
+        </div>
+        {% endif %}
+      </div>
+      <div>
+        <h4>{% trans "Contact" %}</h4>
+        {% if site_settings.phone %}<p><a href="tel:{{ site_settings.phone }}">{{ site_settings.phone }}</a></p>{% endif %}
+        {% if site_settings.email %}<p><a href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a></p>{% endif %}
+        {% if site_settings.address %}<p>{{ site_settings.address }}</p>{% endif %}
+      </div>
+      <div>
+        <h4>{% trans "Hours" %}</h4>
+        <p>{% trans "Check-in" %}: {{ site_settings.check_in_time }}</p>
+        <p>{% trans "Check-out" %}: {{ site_settings.check_out_time }}</p>
+      </div>
+      {% if policy_pages %}
+      <div>
+        <h4>{% trans "Information" %}</h4>
+        <nav class="footer-links" aria-label="{% trans 'Policies' %}">
+          {% for page in policy_pages %}
+          <a href="{% url 'hotel:policy' page.slug %}">{{ page.title }}</a>
+          {% endfor %}
+        </nav>
+      </div>
+      {% endif %}
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; {% now "Y" %} {{ site_settings.site_name }}. {% trans "All rights reserved." %}</p>
+    </div>
+  </footer>
+
+  <a href="{% url 'hotel:book' %}" class="sticky-book btn btn-gold">{% trans "Book" %}</a>
+  <script src="{% static 'js/main.js' %}" defer></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

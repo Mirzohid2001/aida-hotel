@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Page Not Found" %} — {{ site_settings.site_name }}{% endblock %}
+
+{% block content %}
+<section class="error-page">
+  <div class="error-page-inner">
+    <p class="error-code" aria-hidden="true">404</p>
+    <h1>{% trans "Page Not Found" %}</h1>
+    <p>{% trans "The page you are looking for may have been moved or no longer exists." %}</p>
+    <a href="{% url 'hotel:home' %}" class="btn btn-gold">{% trans "Return Home" %}</a>
+  </div>
+</section>
+{% endblock %}

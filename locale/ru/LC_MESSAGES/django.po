@@ -1,0 +1,1226 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-25 14:15+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: config/settings.py:107
+msgid "Uzbek"
+msgstr "Узбекский"
+
+#: config/settings.py:108
+msgid "Russian"
+msgstr "Русский"
+
+#: config/settings.py:109
+msgid "English"
+msgstr "English"
+
+#: config/settings.py:146
+msgid "Aida Hotel — Bukhara CMS"
+msgstr "Aida Hotel — CMS Бухара"
+
+#: config/settings.py:151
+msgid "Website"
+msgstr "Сайт"
+
+#: config/settings.py:152 hotel/models.py:407
+msgid "Bookings"
+msgstr "Бронирования"
+
+#: config/settings.py:153
+msgid "Messages"
+msgstr "Сообщения"
+
+#: config/settings.py:154
+msgid "Settings"
+msgstr "Настройки"
+
+#: hotel/admin.py:44 hotel/models.py:82 hotel/models.py:120
+#: hotel/models.py:136 hotel/models.py:152 hotel/models.py:167
+#: hotel/models.py:182 hotel/models.py:199 hotel/models.py:215
+#: hotel/models.py:230 hotel/models.py:269 hotel/models.py:295
+msgid "Active"
+msgstr "Активно"
+
+#: hotel/admin.py:44
+msgid "Off"
+msgstr "Выкл"
+
+#: hotel/admin.py:87
+msgid "Brand"
+msgstr "Бренд"
+
+#: hotel/admin.py:91 templates/base.html:55 templates/base.html:72
+#: templates/base.html:114 templates/hotel/contact.html:4
+msgid "Contact"
+msgstr "Контакты"
+
+#: hotel/admin.py:95 templates/base.html:120 templates/hotel/contact.html:42
+msgid "Hours"
+msgstr "Часы работы"
+
+#: hotel/admin.py:99
+msgid "Map"
+msgstr "Карта"
+
+#: hotel/admin.py:103
+msgid "Social links"
+msgstr "Соцсети"
+
+#: hotel/admin.py:107 hotel/models.py:50
+msgid "Telegram notifications"
+msgstr "Уведомления Telegram"
+
+#: hotel/admin.py:115
+msgid ""
+"Create a bot with @BotFather, add it to your group, then paste the bot token"
+" and group chat ID (usually starts with -100)."
+msgstr ""
+"Создайте бота через @BotFather, добавьте в группу и вставьте токен бота и ID"
+" чата группы (обычно начинается с -100)."
+
+#: hotel/admin.py:121
+msgid "SEO & analytics"
+msgstr "SEO и аналитика"
+
+#: hotel/admin.py:142 hotel/admin.py:321
+msgid "Preview"
+msgstr "Превью"
+
+#: hotel/admin.py:158
+msgid "Call to action"
+msgstr "Кнопка действия"
+
+#: hotel/admin.py:159 hotel/admin.py:173 hotel/admin.py:183 hotel/admin.py:198
+#: hotel/admin.py:214 hotel/admin.py:357
+msgid "Display"
+msgstr "Отображение"
+
+#: hotel/admin.py:162 hotel/admin.py:186 hotel/models.py:78 hotel/models.py:96
+#: hotel/models.py:133 hotel/models.py:314
+msgid "Image"
+msgstr "Изображение"
+
+#: hotel/admin.py:201 hotel/models.py:150 templates/hotel/home.html:179
+msgid "Rating"
+msgstr "Рейтинг"
+
+#: hotel/admin.py:227
+msgid "Schedule"
+msgstr "Расписание"
+
+#: hotel/admin.py:253 hotel/admin.py:275 hotel/admin.py:379 hotel/admin.py:448
+#: hotel/models.py:397 templates/hotel/booking_success.html:26
+msgid "Status"
+msgstr "Статус"
+
+#: hotel/admin.py:270
+msgid "Sender"
+msgstr "Отправитель"
+
+#: hotel/admin.py:271 hotel/forms.py:102 hotel/models.py:250
+msgid "Message"
+msgstr "Сообщение"
+
+#: hotel/admin.py:272
+msgid "Meta"
+msgstr "Мета"
+
+#: hotel/admin.py:278 hotel/models.py:251
+msgid "Read"
+msgstr "Прочитано"
+
+#: hotel/admin.py:279
+msgid "New"
+msgstr "Новое"
+
+#: hotel/admin.py:281
+msgid "Mark selected as read"
+msgstr "Отметить прочитанными"
+
+#: hotel/admin.py:286
+#, python-format
+msgid "%(count)d message(s) marked as read."
+msgstr "%(count)d сообщений отмечено как прочитанные."
+
+#: hotel/admin.py:290
+msgid "Mark selected as unread"
+msgstr "Отметить непрочитанными"
+
+#: hotel/admin.py:295
+#, python-format
+msgid "%(count)d message(s) marked as unread."
+msgstr "%(count)d сообщений отмечено как непрочитанные."
+
+#: hotel/admin.py:356
+msgid "Pricing & capacity"
+msgstr "Цена и вместимость"
+
+#: hotel/admin.py:360 hotel/models.py:301 hotel/models.py:401
+#: hotel/services/telegram.py:32 templates/base.html:53 templates/base.html:70
+#: templates/hotel/rooms.html:4
+msgid "Rooms"
+msgstr "Номера"
+
+#: hotel/admin.py:423 hotel/services/telegram.py:25
+#: templates/hotel/booking_success.html:22
+msgid "Guest"
+msgstr "Гость"
+
+#: hotel/admin.py:427
+msgid "Stay"
+msgstr "Проживание"
+
+#: hotel/admin.py:431
+msgid "Status & total"
+msgstr "Статус и сумма"
+
+#: hotel/admin.py:435
+msgid "System"
+msgstr "Система"
+
+#: hotel/admin.py:440
+msgid "Dates"
+msgstr "Даты"
+
+#: hotel/admin.py:452
+msgid "Confirm selected bookings"
+msgstr "Подтвердить выбранные бронирования"
+
+#: hotel/admin.py:459
+#, python-format
+msgid "%(count)d booking(s) confirmed."
+msgstr "%(count)d бронирований подтверждено."
+
+#: hotel/admin.py:463
+msgid "Cancel selected bookings"
+msgstr "Отменить выбранные бронирования"
+
+#: hotel/admin.py:470
+#, python-format
+msgid "%(count)d booking(s) cancelled."
+msgstr "%(count)d бронирований отменено."
+
+#: hotel/admin.py:474
+msgid "Mark selected as completed"
+msgstr "Отметить выполненными"
+
+#: hotel/admin.py:479
+#, python-format
+msgid "%(count)d booking(s) completed."
+msgstr "%(count)d бронирований завершено."
+
+#: hotel/admin.py:518 templates/hotel/book.html:135
+msgid "Aida Hotel"
+msgstr "Aida Hotel"
+
+#: hotel/admin.py:519 hotel/apps.py:8
+msgid "Aida Hotel CMS"
+msgstr "Aida Hotel CMS"
+
+#: hotel/admin.py:520 templates/admin/index.html:7
+#: templates/admin/index.html:12
+msgid "Dashboard"
+msgstr "Панель управления"
+
+#: hotel/forms.py:16
+msgid "Invalid submission."
+msgstr "Неверная отправка."
+
+#: hotel/forms.py:27 hotel/models.py:274 hotel/models.py:291
+#: hotel/models.py:312 hotel/models.py:333
+msgid "Room type"
+msgstr "Тип номера"
+
+#: hotel/forms.py:31 hotel/models.py:390 hotel/services/telegram.py:29
+#: templates/base.html:121 templates/hotel/book.html:128
+#: templates/hotel/book.html:145 templates/hotel/booking_success.html:23
+#: templates/hotel/contact.html:43 templates/hotel/home.html:51
+msgid "Check-in"
+msgstr "Заезд"
+
+#: hotel/forms.py:35 hotel/models.py:391 hotel/services/telegram.py:30
+#: templates/base.html:122 templates/hotel/book.html:128
+#: templates/hotel/book.html:149 templates/hotel/booking_success.html:24
+#: templates/hotel/contact.html:43 templates/hotel/home.html:51
+msgid "Check-out"
+msgstr "Выезд"
+
+#: hotel/forms.py:38
+msgid "Full name"
+msgstr "Полное имя"
+
+#: hotel/forms.py:39 hotel/forms.py:100 hotel/models.py:22 hotel/models.py:248
+#: hotel/models.py:387 hotel/services/telegram.py:27
+#: templates/hotel/contact.html:31
+msgid "Email"
+msgstr "Электронная почта"
+
+#: hotel/forms.py:40 hotel/forms.py:101 hotel/models.py:21 hotel/models.py:249
+#: hotel/models.py:388 hotel/services/telegram.py:26
+#: templates/hotel/contact.html:25
+msgid "Phone"
+msgstr "Телефон"
+
+#: hotel/forms.py:41 hotel/models.py:389 hotel/services/telegram.py:28
+msgid "Guests"
+msgstr "Гости"
+
+#: hotel/forms.py:45 hotel/models.py:392 hotel/services/telegram.py:37
+msgid "Special requests"
+msgstr "Особые пожелания"
+
+#: hotel/forms.py:71
+msgid "Check-in date cannot be in the past."
+msgstr "Дата заезда не может быть в прошлом."
+
+#: hotel/forms.py:77
+msgid "Please select at least one available room."
+msgstr "Выберите хотя бы один доступный номер."
+
+#: hotel/forms.py:80
+msgid "Selected rooms are not available for these dates."
+msgstr "Выбранные номера недоступны на эти даты."
+
+#: hotel/forms.py:99 hotel/models.py:116 hotel/models.py:211
+#: hotel/models.py:247 hotel/models.py:263
+msgid "Name"
+msgstr "Название"
+
+#: hotel/models.py:10
+msgid "Created at"
+msgstr "Создано"
+
+#: hotel/models.py:11
+msgid "Updated at"
+msgstr "Обновлено"
+
+#: hotel/models.py:18
+msgid "Site name"
+msgstr "Название сайта"
+
+#: hotel/models.py:19
+msgid "Tagline"
+msgstr "Слоган"
+
+#: hotel/models.py:20
+msgid "Logo"
+msgstr "Логотип"
+
+#: hotel/models.py:23 templates/hotel/contact.html:37
+msgid "Address"
+msgstr "Адрес"
+
+#: hotel/models.py:24
+msgid "Check-in time"
+msgstr "Время заезда"
+
+#: hotel/models.py:25
+msgid "Check-out time"
+msgstr "Время выезда"
+
+#: hotel/models.py:27
+msgid "Map latitude"
+msgstr "Широта"
+
+#: hotel/models.py:30
+msgid "Map longitude"
+msgstr "Долгота"
+
+#: hotel/models.py:32
+msgid "Facebook URL"
+msgstr "Ссылка Facebook"
+
+#: hotel/models.py:33
+msgid "Instagram URL"
+msgstr "Ссылка Instagram"
+
+#: hotel/models.py:34
+msgid "Telegram URL"
+msgstr "Ссылка Telegram"
+
+#: hotel/models.py:35
+msgid "Google Analytics ID"
+msgstr "Google Analytics ID"
+
+#: hotel/models.py:36
+msgid "Yandex Metrika ID"
+msgstr "Yandex Metrika ID"
+
+#: hotel/models.py:38
+msgid "Telegram bot token"
+msgstr "Токен Telegram-бота"
+
+#: hotel/models.py:41
+msgid "From @BotFather, e.g. 123456789:ABCdef..."
+msgstr "От @BotFather, например 123456789:ABCdef..."
+
+#: hotel/models.py:44
+msgid "Telegram chat ID"
+msgstr "ID чата Telegram"
+
+#: hotel/models.py:47
+msgid "Group or channel chat ID, e.g. -1001234567890"
+msgstr "ID группы или канала, например -1001234567890"
+
+#: hotel/models.py:52
+msgid "Send a Telegram message when a new booking is submitted."
+msgstr "Отправлять сообщение в Telegram при новой брони."
+
+#: hotel/models.py:54
+msgid "Meta title"
+msgstr "Meta title"
+
+#: hotel/models.py:55
+msgid "Meta description"
+msgstr "Meta description"
+
+#: hotel/models.py:56
+msgid "OG image"
+msgstr "OG изображение"
+
+#: hotel/models.py:59 hotel/models.py:60
+msgid "Site settings"
+msgstr "Настройки сайта"
+
+#: hotel/models.py:76 hotel/models.py:94 hotel/models.py:132
+#: hotel/models.py:179 hotel/models.py:227
+msgid "Title"
+msgstr "Заголовок"
+
+#: hotel/models.py:77
+msgid "Subtitle"
+msgstr "Подзаголовок"
+
+#: hotel/models.py:79
+msgid "CTA text"
+msgstr "Текст кнопки"
+
+#: hotel/models.py:80
+msgid "CTA URL"
+msgstr "Ссылка кнопки"
+
+#: hotel/models.py:81 hotel/models.py:119 hotel/models.py:135
+#: hotel/models.py:151 hotel/models.py:166 hotel/models.py:198
+#: hotel/models.py:214 hotel/models.py:270 hotel/models.py:316
+msgid "Ordering"
+msgstr "Порядок"
+
+#: hotel/models.py:86
+msgid "Hero slide"
+msgstr "Слайд баннера"
+
+#: hotel/models.py:87 templates/hotel/home.html:25
+msgid "Hero slides"
+msgstr "Слайды баннера"
+
+#: hotel/models.py:95 hotel/models.py:149 hotel/models.py:229
+msgid "Content"
+msgstr "Содержание"
+
+#: hotel/models.py:99 hotel/models.py:100
+msgid "About section"
+msgstr "Раздел о нас"
+
+#: hotel/models.py:117 hotel/models.py:180 hotel/models.py:265
+msgid "Description"
+msgstr "Описание"
+
+#: hotel/models.py:118 hotel/models.py:213
+msgid "Icon"
+msgstr "Иконка"
+
+#: hotel/models.py:124
+msgid "Amenity"
+msgstr "Удобство"
+
+#: hotel/models.py:125 templates/hotel/home.html:128
+msgid "Amenities"
+msgstr "Удобства"
+
+#: hotel/models.py:134 hotel/models.py:315
+msgid "Caption"
+msgstr "Подпись"
+
+#: hotel/models.py:140
+msgid "Gallery image"
+msgstr "Изображение галереи"
+
+#: hotel/models.py:141
+msgid "Gallery images"
+msgstr "Изображения галереи"
+
+#: hotel/models.py:148 hotel/models.py:386
+msgid "Guest name"
+msgstr "Имя гостя"
+
+#: hotel/models.py:156
+msgid "Testimonial"
+msgstr "Отзыв"
+
+#: hotel/models.py:157 templates/hotel/home.html:172
+msgid "Testimonials"
+msgstr "Отзывы"
+
+#: hotel/models.py:164
+msgid "Question"
+msgstr "Вопрос"
+
+#: hotel/models.py:165
+msgid "Answer"
+msgstr "Ответ"
+
+#: hotel/models.py:171 templates/hotel/home.html:215
+msgid "FAQ"
+msgstr "FAQ"
+
+#: hotel/models.py:172
+msgid "FAQs"
+msgstr "Частые вопросы"
+
+#: hotel/models.py:181
+msgid "Discount label"
+msgstr "Метка скидки"
+
+#: hotel/models.py:183
+msgid "Starts at"
+msgstr "Начало"
+
+#: hotel/models.py:184
+msgid "Ends at"
+msgstr "Окончание"
+
+#: hotel/models.py:188
+msgid "Promotion"
+msgstr "Акция"
+
+#: hotel/models.py:189
+msgid "Promotions"
+msgstr "Акции"
+
+#: hotel/models.py:196
+msgid "Value"
+msgstr "Значение"
+
+#: hotel/models.py:197
+msgid "Label"
+msgstr "Подпись"
+
+#: hotel/models.py:203
+msgid "Stat highlight"
+msgstr "Показатель"
+
+#: hotel/models.py:204
+msgid "Stat highlights"
+msgstr "Показатели"
+
+#: hotel/models.py:212
+msgid "Distance"
+msgstr "Расстояние"
+
+#: hotel/models.py:219
+msgid "Nearby place"
+msgstr "Место рядом"
+
+#: hotel/models.py:220
+msgid "Nearby places"
+msgstr "Места рядом"
+
+#: hotel/models.py:228 hotel/models.py:264
+msgid "Slug"
+msgstr "Slug"
+
+#: hotel/models.py:234
+msgid "Policy page"
+msgstr "Страница политики"
+
+#: hotel/models.py:235
+msgid "Policy pages"
+msgstr "Страницы политик"
+
+#: hotel/models.py:255
+msgid "Contact message"
+msgstr "Сообщение"
+
+#: hotel/models.py:256
+msgid "Contact messages"
+msgstr "Сообщения"
+
+#: hotel/models.py:266
+msgid "Base price"
+msgstr "Базовая цена"
+
+#: hotel/models.py:267 templates/hotel/room_detail.html:40
+#: templates/hotel/rooms.html:30
+msgid "Capacity"
+msgstr "Вместимость"
+
+#: hotel/models.py:268
+msgid "Size (m²)"
+msgstr "Площадь (м²)"
+
+#: hotel/models.py:275
+msgid "Room types"
+msgstr "Типы номеров"
+
+#: hotel/models.py:293
+msgid "Number"
+msgstr "Номер"
+
+#: hotel/models.py:294 templates/hotel/partials/room_grid.html:20
+msgid "Floor"
+msgstr "Этаж"
+
+#: hotel/models.py:300 hotel/models.py:357 hotel/models.py:428
+#: templates/hotel/partials/room_grid.html:16
+msgid "Room"
+msgstr "Номер"
+
+#: hotel/models.py:317
+msgid "Primary"
+msgstr "Основное"
+
+#: hotel/models.py:321
+msgid "Room image"
+msgstr "Фото номера"
+
+#: hotel/models.py:322
+msgid "Room images"
+msgstr "Фото номеров"
+
+#: hotel/models.py:335 hotel/models.py:359
+msgid "Start date"
+msgstr "Дата начала"
+
+#: hotel/models.py:336 hotel/models.py:360
+msgid "End date"
+msgstr "Дата окончания"
+
+#: hotel/models.py:337
+msgid "Price"
+msgstr "Цена"
+
+#: hotel/models.py:341
+msgid "Seasonal price"
+msgstr "Сезонная цена"
+
+#: hotel/models.py:342
+msgid "Seasonal prices"
+msgstr "Сезонные цены"
+
+#: hotel/models.py:349 hotel/models.py:373
+msgid "End date must be after start date."
+msgstr "Дата окончания должна быть позже даты начала."
+
+#: hotel/models.py:361
+msgid "Reason"
+msgstr "Причина"
+
+#: hotel/models.py:365
+msgid "Blocked date"
+msgstr "Заблокированная дата"
+
+#: hotel/models.py:366
+msgid "Blocked dates"
+msgstr "Заблокированные даты"
+
+#: hotel/models.py:378
+msgid "Pending"
+msgstr "Ожидает"
+
+#: hotel/models.py:379 templates/admin/index.html:31
+#: templates/hotel/booking_success.html:9
+msgid "Confirmed"
+msgstr "Подтверждено"
+
+#: hotel/models.py:380
+msgid "Cancelled"
+msgstr "Отменено"
+
+#: hotel/models.py:381
+msgid "Completed"
+msgstr "Завершено"
+
+#: hotel/models.py:384
+msgid "Reference code"
+msgstr "Код брони"
+
+#: hotel/models.py:394 templates/hotel/booking_success.html:25
+msgid "Estimated total"
+msgstr "Ориентировочная сумма"
+
+#: hotel/models.py:399
+msgid "Internal notes"
+msgstr "Внутренние заметки"
+
+#: hotel/models.py:406 hotel/models.py:422
+msgid "Booking"
+msgstr "Бронирование"
+
+#: hotel/models.py:414 hotel/services/booking.py:21 hotel/views.py:118
+msgid "Check-out must be after check-in."
+msgstr "Дата выезда должна быть позже даты заезда."
+
+#: hotel/models.py:430
+msgid "Nightly rate"
+msgstr "Цена за ночь"
+
+#: hotel/models.py:434
+msgid "Booking room"
+msgstr "Номер в брони"
+
+#: hotel/models.py:435
+msgid "Booking rooms"
+msgstr "Номера в брони"
+
+#: hotel/services/booking.py:23
+msgid "Stay must be at least one night."
+msgstr "Минимальное пребывание — одна ночь."
+
+#: hotel/services/booking.py:28
+msgid "Please select at least one room."
+msgstr "Выберите хотя бы один номер."
+
+#: hotel/services/booking.py:32
+msgid "One or more selected rooms are invalid."
+msgstr "Один или несколько выбранных номеров недействительны."
+
+#: hotel/services/booking.py:36
+#, python-format
+msgid "Room %(room)s is no longer available."
+msgstr "Номер %(room)s больше недоступен."
+
+#: hotel/services/telegram.py:22
+msgid "New booking"
+msgstr "Новое бронирование"
+
+#: hotel/services/telegram.py:24
+msgid "Reference"
+msgstr "Код"
+
+#: hotel/services/telegram.py:31
+msgid "Nights"
+msgstr "Ночей"
+
+#: hotel/services/telegram.py:33 templates/hotel/partials/price_summary.html:6
+msgid "Total"
+msgstr "Итого"
+
+#: hotel/views.py:108
+msgid "Please select dates."
+msgstr "Выберите даты."
+
+#: hotel/views.py:115
+msgid "Invalid dates."
+msgstr "Неверные даты."
+
+#: hotel/views.py:164
+msgid "Thank you! We will get back to you soon."
+msgstr "Спасибо! Мы скоро свяжемся с вами."
+
+#: templates/404.html:4 templates/404.html:10
+msgid "Page Not Found"
+msgstr "Страница не найдена"
+
+#: templates/404.html:11
+msgid "The page you are looking for may have been moved or no longer exists."
+msgstr "Искомая страница могла быть перемещена или больше не существует."
+
+#: templates/404.html:12 templates/500.html:12
+msgid "Return Home"
+msgstr "На главную"
+
+#: templates/500.html:4
+msgid "Server Error"
+msgstr "Ошибка сервера"
+
+#: templates/500.html:10
+msgid "Something Went Wrong"
+msgstr "Что-то пошло не так"
+
+#: templates/500.html:11
+msgid ""
+"We apologize for the inconvenience. Please try again later or contact us for"
+" assistance."
+msgstr ""
+"Приносим извинения за неудобства. Попробуйте позже или свяжитесь с нами."
+
+#: templates/admin/index.html:11 templates/base.html:52 templates/base.html:69
+msgid "Home"
+msgstr "Главная"
+
+#: templates/admin/index.html:27
+msgid "Pending bookings"
+msgstr "Ожидающие бронирования"
+
+#: templates/admin/index.html:35
+msgid "Unread messages"
+msgstr "Непрочитанные сообщения"
+
+#: templates/admin/index.html:39
+msgid "Active rooms"
+msgstr "Активные номера"
+
+#: templates/admin/index.html:65
+msgid "Add"
+msgstr "Добавить"
+
+#: templates/admin/index.html:69
+msgid "View"
+msgstr "Просмотр"
+
+#: templates/admin/index.html:71
+msgid "Go"
+msgstr "Перейти"
+
+#: templates/admin/index.html:71
+msgid "Change"
+msgstr "Изменить"
+
+#: templates/admin/index.html:96
+msgid "Recent actions"
+msgstr "Недавние действия"
+
+#: templates/admin/index.html:100
+msgid "None available"
+msgstr "Нет данных"
+
+#: templates/admin/index.html:114
+#, python-format
+msgid "%(timesince)s ago"
+msgstr "%(timesince)s назад"
+
+#: templates/base.html:43
+msgid "Skip to content"
+msgstr "Перейти к содержанию"
+
+#: templates/base.html:51
+msgid "Main navigation"
+msgstr "Главная навигация"
+
+#: templates/base.html:54 templates/base.html:71 templates/base.html:140
+#: templates/hotel/rooms.html:36
+msgid "Book"
+msgstr "Бронь"
+
+#: templates/base.html:60 templates/base.html:73 templates/hotel/home.html:233
+msgid "Book Now"
+msgstr "Забронировать"
+
+#: templates/base.html:61
+msgid "Open menu"
+msgstr "Открыть меню"
+
+#: templates/base.html:68
+msgid "Mobile navigation"
+msgstr "Мобильная навигация"
+
+#: templates/base.html:126 templates/hotel/policy.html:9
+msgid "Information"
+msgstr "Информация"
+
+#: templates/base.html:127
+msgid "Policies"
+msgstr "Политики"
+
+#: templates/base.html:136
+msgid "All rights reserved."
+msgstr "Все права защищены."
+
+#: templates/hotel/book.html:4
+msgid "Book a Room"
+msgstr "Забронировать номер"
+
+#: templates/hotel/book.html:10 templates/hotel/home.html:231
+msgid "Reservations"
+msgstr "Бронирование"
+
+#: templates/hotel/book.html:11 templates/hotel/home.html:38
+msgid "Book Your Stay"
+msgstr "Забронируйте проживание"
+
+#: templates/hotel/book.html:12
+msgid "Select dates and choose your room."
+msgstr "Выберите даты и номер."
+
+#: templates/hotel/book.html:31
+msgid "Stay Details"
+msgstr "Детали проживания"
+
+#: templates/hotel/book.html:60
+msgid "Choose Your Room"
+msgstr "Выберите номер"
+
+#: templates/hotel/book.html:77
+msgid "Select room type and dates to see availability."
+msgstr "Выберите тип номера и даты, чтобы увидеть доступность."
+
+#: templates/hotel/book.html:93
+msgid "Guest Information"
+msgstr "Данные гостя"
+
+#: templates/hotel/book.html:129
+msgid "Confirm Booking"
+msgstr "Подтвердить бронирование"
+
+#: templates/hotel/book.html:135 templates/hotel/home.html:15
+#: templates/hotel/home.html:35
+msgid "Bukhara"
+msgstr "Бухара"
+
+#: templates/hotel/book.html:136
+msgid "Why Book Direct"
+msgstr "Почему бронировать напрямую"
+
+#: templates/hotel/book.html:138
+msgid "Best rate guarantee"
+msgstr "Гарантия лучшей цены"
+
+#: templates/hotel/book.html:139
+msgid "Flexible cancellation"
+msgstr "Гибкая отмена"
+
+#: templates/hotel/book.html:140
+msgid "Complimentary welcome amenity"
+msgstr "Бесплатный приветственный подарок"
+
+#: templates/hotel/book.html:141
+msgid "Priority room selection"
+msgstr "Приоритетный выбор номера"
+
+#: templates/hotel/book.html:155
+msgid "Need help?"
+msgstr "Нужна помощь?"
+
+#: templates/hotel/booking_success.html:4
+msgid "Booking Confirmed"
+msgstr "Бронирование подтверждено"
+
+#: templates/hotel/booking_success.html:10
+msgid "Thank You"
+msgstr "Спасибо"
+
+#: templates/hotel/booking_success.html:18
+msgid "Your booking is confirmed!"
+msgstr "Ваше бронирование подтверждено!"
+
+#: templates/hotel/booking_success.html:19
+msgid "Your reference code is"
+msgstr "Ваш код бронирования"
+
+#: templates/hotel/booking_success.html:29
+msgid "Back to Home"
+msgstr "Вернуться на главную"
+
+#: templates/hotel/booking_success.html:30 templates/hotel/contact.html:10
+#: templates/hotel/rooms.html:44
+msgid "Contact Us"
+msgstr "Свяжитесь с нами"
+
+#: templates/hotel/contact.html:9
+msgid "Get in Touch"
+msgstr "Связаться"
+
+#: templates/hotel/contact.html:11
+msgid "We would love to hear from you."
+msgstr "Мы будем рады вашему сообщению."
+
+#: templates/hotel/contact.html:19
+msgid "Reach Us"
+msgstr "Как связаться"
+
+#: templates/hotel/contact.html:20
+msgid "We're Here to Help"
+msgstr "Мы готовы помочь"
+
+#: templates/hotel/contact.html:56
+msgid "Send Message"
+msgstr "Отправить сообщение"
+
+#: templates/hotel/contact.html:65 templates/hotel/home.html:195
+msgid "Location"
+msgstr "Расположение"
+
+#: templates/hotel/contact.html:66
+msgid "Find Us in Bukhara"
+msgstr "Найдите нас в Бухаре"
+
+#: templates/hotel/contact.html:70
+msgid "Aida Hotel on map"
+msgstr "Aida Hotel на карте"
+
+#: templates/hotel/contact.html:81
+msgid "Open in Google Maps"
+msgstr "Открыть в Google Maps"
+
+#: templates/hotel/home.html:4
+msgid "Luxury Stay"
+msgstr "Роскошное пребывание"
+
+#: templates/hotel/home.html:19
+msgid "View Details"
+msgstr "Подробнее"
+
+#: templates/hotel/home.html:27
+msgid "Slide"
+msgstr "Слайд"
+
+#: templates/hotel/home.html:39
+msgid "Explore Rooms"
+msgstr "Смотреть номера"
+
+#: templates/hotel/home.html:44
+msgid "Scroll"
+msgstr "Прокрутить"
+
+#: templates/hotel/home.html:50
+msgid "Plan Your Stay"
+msgstr "Спланируйте проживание"
+
+#: templates/hotel/home.html:53
+msgid "Check Availability"
+msgstr "Проверить наличие"
+
+#: templates/hotel/home.html:76
+msgid "Our Story"
+msgstr "Наша история"
+
+#: templates/hotel/home.html:96 templates/hotel/room_detail.html:53
+#: templates/hotel/rooms.html:9
+msgid "Accommodations"
+msgstr "Размещение"
+
+#: templates/hotel/home.html:97
+msgid "Our Rooms"
+msgstr "Наши номера"
+
+#: templates/hotel/home.html:98
+msgid "Elegantly appointed spaces designed for comfort and refinement."
+msgstr "Изысканные номера, созданные для комфорта и утончённости."
+
+#: templates/hotel/home.html:109 templates/hotel/room_detail.html:11
+#: templates/hotel/room_detail.html:65 templates/hotel/rooms.html:24
+msgid "From"
+msgstr "От"
+
+#: templates/hotel/home.html:117
+msgid "View All Rooms"
+msgstr "Все номера"
+
+#: templates/hotel/home.html:127
+msgid "Experience"
+msgstr "Впечатления"
+
+#: templates/hotel/home.html:147
+msgid "Visual Journey"
+msgstr "Визуальное путешествие"
+
+#: templates/hotel/home.html:148
+msgid "Gallery"
+msgstr "Галерея"
+
+#: templates/hotel/home.html:173
+msgid "Guest Reviews"
+msgstr "Отзывы гостей"
+
+#: templates/hotel/home.html:174
+msgid "What our distinguished guests say about their stay."
+msgstr "Что говорят наши гости о своём пребывании."
+
+#: templates/hotel/home.html:196
+msgid "Nearby"
+msgstr "Рядом"
+
+#: templates/hotel/home.html:214
+msgid "Questions"
+msgstr "Вопросы"
+
+#: templates/hotel/home.html:232
+msgid "Ready for an unforgettable stay?"
+msgstr "Готовы к незабываемому отдыху?"
+
+#: templates/hotel/partials/price_summary.html:4
+msgid "Price Summary"
+msgstr "Сводка по цене"
+
+#: templates/hotel/partials/price_summary.html:5
+#, python-format
+msgid " %(count)s room(s) × %(nights)s night(s)"
+msgstr " %(count)s номер(ов) × %(nights)s ночь(ей)"
+
+#: templates/hotel/partials/room_grid.html:9
+msgid "Available Rooms"
+msgstr "Доступные номера"
+
+#: templates/hotel/partials/room_grid.html:10
+#, python-format
+msgid "Stay: %(nights)s night(s)"
+msgstr "Проживание: %(nights)s ночь(ей)"
+
+#: templates/hotel/partials/room_grid.html:18
+msgid "Available"
+msgstr "Свободен"
+
+#: templates/hotel/partials/room_grid.html:18
+msgid "Occupied"
+msgstr "Занят"
+
+#: templates/hotel/partials/room_grid.html:27
+msgid "No rooms found for this type."
+msgstr "Номера этого типа не найдены."
+
+#: templates/hotel/partials/skeleton_grid.html:2
+msgid "Loading rooms"
+msgstr "Загрузка номеров"
+
+#: templates/hotel/room_detail.html:9
+msgid "Room Details"
+msgstr "Детали номера"
+
+#: templates/hotel/room_detail.html:11
+msgid "night"
+msgstr "ночь"
+
+#: templates/hotel/room_detail.html:36
+msgid "Overview"
+msgstr "Обзор"
+
+#: templates/hotel/room_detail.html:37
+msgid "About This Room"
+msgstr "Об этом номере"
+
+#: templates/hotel/room_detail.html:40
+msgid "guests"
+msgstr "гостей"
+
+#: templates/hotel/room_detail.html:41
+msgid "Size"
+msgstr "Площадь"
+
+#: templates/hotel/room_detail.html:42
+msgid "Rooms of this type"
+msgstr "Номера этого типа"
+
+#: templates/hotel/room_detail.html:44
+msgid "Book This Room"
+msgstr "Забронировать этот номер"
+
+#: templates/hotel/room_detail.html:54
+msgid "You May Also Like"
+msgstr "Вам также может понравиться"
+
+#: templates/hotel/rooms.html:10
+msgid "Our Rooms & Suites"
+msgstr "Наши номера и люксы"
+
+#: templates/hotel/rooms.html:11
+msgid "Choose the perfect room for your stay."
+msgstr "Выберите идеальный номер для вашего пребывания."
+
+#: templates/hotel/rooms.html:32
+#, python-format
+msgid "%(counter)s room"
+msgid_plural "%(counter)s rooms"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: templates/hotel/rooms.html:35
+msgid "Details"
+msgstr "Детали"
+
+#: templates/hotel/rooms.html:43
+msgid "No rooms available at the moment."
+msgstr "На данный момент номеров нет."
+
+#: templates/partials/language_switcher.html:4
+msgid "Language"
+msgstr "Язык"
+
+msgid ""
+"First, enter a username and password. Then, you'll be able to edit more user"
+" options."
+msgstr ""
+"Сначала введите имя пользователя и пароль, после чего вы сможете изменить "
+"остальную информацию о пользователе."
+
+msgid "Account"
+msgstr "Аккаунт"
+
+msgid "See Profile"
+msgstr "Профиль"
+
+msgid "Jazzmin version"
+msgstr "Jazzmin Version"
+
+msgid "Copyright"
+msgstr ""
+
+msgid "UI Configuration"
+msgstr "Настройки UI"
+
+msgid "Copy this info your settings file to persist these UI changes"
+msgstr ""
+"Скопируйте этот текст в свои настройки проекта, чтобы применить изменения"
+
+msgid "Actions"
+msgstr "Действия"
+
+msgid ""
+"This object doesn't have a change history. It probably wasn't added via this"
+" admin site."
+msgstr ""
+"У этого объекта нет истории изменений. Вероятно, он был добавлен не через "
+"эту админ-панель."
+
+msgid "Popup closing..."
+msgstr "Закрытие всплывающего окна..."
+
+msgid "Views by namespace %(name)"
+msgstr "Представления по пространству имён %(name)"
+
+msgid "Views by empty namespace"
+msgstr "Представления по пустому пространству имён"
+
+msgid ""
+"View function: <code>%(full_name)s</code>. Name: <code>%(url_name)s</code>."
+msgstr ""
+"Функция представления: <code>%(full_name)s</code>. Название: "
+"<code>%(url_name)s</code>."
+
+msgid "General"
+msgstr "Основная информация"
+
+msgid ""
+"Please enter your old password, for security's sake, and then enter your new"
+" password twice so we can verify you typed it in correctly."
+msgstr ""
+"В целях безопасности введите свой старый пароль, а затем дважды введите "
+"новый пароль, чтобы мы могли убедиться, что вы ввели его правильно."
+
+msgid "Deleted “{object}”."
+msgstr "Удалено “{object}”."
+
+msgid "Could not reverse url from {instance}"
+msgstr "Не удалось получить обратный url для {instance}"
+
+#~ msgid "SEO"
+#~ msgstr "SEO"
+
+#~ msgid "Luxury Boutique Hotel"
+#~ msgstr "Роскошный бутик-отель"

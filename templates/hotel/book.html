@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Book a Room" %} — {{ site_settings.site_name }}{% endblock %}
+{% block body_class %}page-book{% endblock %}
+
+{% block content %}
+<section class="page-hero page-hero--compact">
+  <div class="container">
+    <span class="section-eyebrow">{% trans "Reservations" %}</span>
+    <h1>{% trans "Book Your Stay" %}</h1>
+    <p>{% trans "Select dates and choose your room." %}</p>
+  </div>
+</section>
+
+<section class="section section--white booking-section">
+  <div class="container container--booking">
+    <div class="booking-page-grid">
+    <form method="post" class="booking-form" id="booking-form" novalidate data-js-booking>
+      {% csrf_token %}
+      {{ form.room_ids }}
+      {{ form.website }}
+
+      {% if form.non_field_errors %}
+        <div class="alert alert-error">{{ form.non_field_errors }}</div>
+      {% endif %}
+
+      <fieldset class="booking-step">
+        <legend class="booking-step-title">
+          <span class="booking-step-num">01</span>
+          {% trans "Stay Details" %}
+        </legend>
+
+        <div class="form-row form-row--stay">
+          <div class="form-group">
+            {{ form.room_type.label_tag }}
+            <select name="{{ form.room_type.name }}" id="id_room_type" class="form-control">
+              {% for rt in form.fields.room_type.queryset %}
+              <option value="{{ rt.pk }}" data-capacity="{{ rt.capacity }}" {% if form.room_type.value|stringformat:"s" == rt.pk|stringformat:"s" %}selected{% endif %}>{{ rt.name }}</option>
+              {% endfor %}
+            </select>
+            {% if form.room_type.errors %}<span class="field-error">{{ form.room_type.errors }}</span>{% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.check_in.label_tag }}
+            {{ form.check_in }}
+            {% if form.check_in.errors %}<span class="field-error">{{ form.check_in.errors }}</span>{% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.check_out.label_tag }}
+            {{ form.check_out }}
+            {% if form.check_out.errors %}<span class="field-error">{{ form.check_out.errors }}</span>{% endif %}
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="booking-step booking-step--rooms">
+        <legend class="booking-step-title">
+          <span class="booking-step-num">02</span>
+          {% trans "Choose Your Room" %}
+        </legend>
+
+        <div class="room-grid-loading htmx-indicator" aria-hidden="true">
+          {% include "hotel/partials/skeleton_grid.html" %}
+        </div>
+
+        <div id="room-grid"
+             class="room-grid-panel"
+             hx-get="{% url 'hotel:booking_availability' %}"
+             hx-trigger="change from:#id_room_type, change from:#id_check_in, change from:#id_check_out"
+             hx-include="#id_room_type, #id_check_in, #id_check_out"
+             hx-target="#room-grid"
+             hx-swap="innerHTML"
+             hx-indicator=".room-grid-loading">
+          <div class="room-grid-empty">
+            <span class="room-grid-empty-icon" aria-hidden="true">◫</span>
+            <p>{% trans "Select room type and dates to see availability." %}</p>
+          </div>
+        </div>
+
+        <div id="price-summary"
+             hx-get="{% url 'hotel:booking_availability' %}?partial=price"
+             hx-trigger="roomSelectionChanged from:body"
+             hx-include="#id_room_type, #id_check_in, #id_check_out, #id_room_ids"
+             hx-target="#price-summary"
+             hx-swap="innerHTML">
+        </div>
+      </fieldset>
+
+      <fieldset class="booking-step">
+        <legend class="booking-step-title">
+          <span class="booking-step-num">03</span>
+          {% trans "Guest Information" %}
+        </legend>
+
+        <div class="form-row two-col">
+          <div class="form-group">
+            {{ form.guest_name.label_tag }}
+            {{ form.guest_name }}
+            {% if form.guest_name.errors %}<span class="field-error">{{ form.guest_name.errors }}</span>{% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+            {% if form.email.errors %}<span class="field-error">{{ form.email.errors }}</span>{% endif %}
+          </div>
+        </div>
+        <div class="form-row two-col">
+          <div class="form-group">
+            {{ form.phone.label_tag }}
+            {{ form.phone }}
+            {% if form.phone.errors %}<span class="field-error">{{ form.phone.errors }}</span>{% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.guests_count.label_tag }}
+            {{ form.guests_count }}
+            {% if form.guests_count.errors %}<span class="field-error">{{ form.guests_count.errors }}</span>{% endif %}
+          </div>
+        </div>
+        <div class="form-group">
+          {{ form.special_requests.label_tag }}
+          {{ form.special_requests }}
+          {% if form.special_requests.errors %}<span class="field-error">{{ form.special_requests.errors }}</span>{% endif %}
+        </div>
+      </fieldset>
+
+      <div class="booking-form-actions">
+        <p class="booking-form-note">{% trans "Check-in" %}: {{ site_settings.check_in_time }} · {% trans "Check-out" %}: {{ site_settings.check_out_time }}</p>
+        <button type="submit" class="btn btn-gold" data-submit-btn>{% trans "Confirm Booking" %}</button>
+      </div>
+    </form>
+
+    <aside class="booking-sidebar">
+      <div class="booking-sidebar-card">
+        <span class="booking-sidebar-eyebrow">{% trans "Aida Hotel" %} · {% trans "Bukhara" %}</span>
+        <h3>{% trans "Why Book Direct" %}</h3>
+        <ul class="booking-benefits">
+          <li>{% trans "Best rate guarantee" %}</li>
+          <li>{% trans "Flexible cancellation" %}</li>
+          <li>{% trans "Complimentary welcome amenity" %}</li>
+          <li>{% trans "Priority room selection" %}</li>
+        </ul>
+        <div class="booking-sidebar-meta">
+          <div class="booking-sidebar-meta-item">
+            <span>{% trans "Check-in" %}</span>
+            <strong>{{ site_settings.check_in_time }}</strong>
+          </div>
+          <div class="booking-sidebar-meta-item">
+            <span>{% trans "Check-out" %}</span>
+            <strong>{{ site_settings.check_out_time }}</strong>
+          </div>
+        </div>
+        {% if site_settings.phone %}
+        <a href="tel:{{ site_settings.phone }}" class="booking-sidebar-phone">
+          <span>{% trans "Need help?" %}</span>
+          <strong>{{ site_settings.phone }}</strong>
+        </a>
+        {% endif %}
+      </div>
+    </aside>
+    </div>
+  </div>
+</section>
+{% endblock %}

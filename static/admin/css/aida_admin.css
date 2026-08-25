@@ -1,0 +1,235 @@
+/* Aida Hotel — Jazzmin admin polish */
+
+:root {
+  --aida-black: #0c0b0a;
+  --aida-ivory: #f7f3eb;
+  --aida-bronze: #a07840;
+  --aida-bronze-deep: #7a5a2e;
+  --aida-warm: #e8dfd0;
+  --aida-ok: #2f6b4f;
+  --aida-warn: #b07a1a;
+  --aida-danger: #9b3b2e;
+  --aida-info: #3a5a78;
+}
+
+/* Brand chrome */
+.main-header.navbar,
+.main-sidebar,
+.brand-link {
+  background: var(--aida-black) !important;
+  border-color: transparent !important;
+}
+
+.brand-link .brand-image {
+  float: none;
+  max-height: 34px;
+  margin: 0 0.4rem 0 0;
+  opacity: 1 !important;
+}
+
+.brand-link .brand-text {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--aida-ivory) !important;
+}
+
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active,
+.sidebar-dark-primary .nav-sidebar > .nav-item.menu-open > .nav-link {
+  background: rgba(160, 120, 64, 0.28) !important;
+  color: #fff !important;
+}
+
+.nav-sidebar .nav-link:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+.content-wrapper,
+.main-footer {
+  background: var(--aida-ivory) !important;
+}
+
+.btn-warning,
+.btn-primary {
+  background-color: var(--aida-bronze) !important;
+  border-color: var(--aida-bronze-deep) !important;
+  color: #fff !important;
+}
+
+.btn-warning:hover,
+.btn-primary:hover {
+  background-color: var(--aida-bronze-deep) !important;
+  border-color: var(--aida-bronze-deep) !important;
+  color: #fff !important;
+}
+
+.card {
+  border: 1px solid rgba(12, 11, 10, 0.08);
+  box-shadow: 0 8px 24px rgba(12, 11, 10, 0.04);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-header {
+  background: #fff;
+  border-bottom: 1px solid rgba(12, 11, 10, 0.06);
+  font-weight: 600;
+}
+
+/* Login */
+.login-page,
+.login-box {
+  background: linear-gradient(145deg, #0c0b0a 0%, #2a2218 55%, #a07840 140%) !important;
+}
+
+.login-logo a,
+.login-logo img {
+  max-height: 56px;
+}
+
+.login-card-body {
+  border-radius: 12px;
+}
+
+/* Thumbnails & badges */
+.aida-thumb {
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid rgba(12, 11, 10, 0.1);
+  vertical-align: middle;
+  background: #fff;
+}
+
+.aida-muted {
+  color: #9a9286;
+}
+
+.aida-badge {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.aida-badge--ok {
+  background: rgba(47, 107, 79, 0.14);
+  color: var(--aida-ok);
+}
+
+.aida-badge--warn {
+  background: rgba(176, 122, 26, 0.16);
+  color: var(--aida-warn);
+}
+
+.aida-badge--danger {
+  background: rgba(155, 59, 46, 0.14);
+  color: var(--aida-danger);
+}
+
+.aida-badge--info {
+  background: rgba(58, 90, 120, 0.14);
+  color: var(--aida-info);
+}
+
+.aida-badge--off {
+  background: rgba(12, 11, 10, 0.08);
+  color: #6b655c;
+}
+
+.aida-stars {
+  color: var(--aida-bronze);
+  letter-spacing: 0.05em;
+}
+
+.aida-dates {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Dashboard stats */
+.aida-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0 0 1.25rem;
+  width: 100%;
+}
+
+@media (max-width: 991px) {
+  .aida-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 575px) {
+  .aida-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+.aida-stat {
+  display: block;
+  padding: 1.1rem 1.15rem;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(12, 11, 10, 0.08);
+  text-decoration: none !important;
+  color: inherit !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.aida-stat:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(12, 11, 10, 0.08);
+  border-color: rgba(160, 120, 64, 0.45);
+}
+
+.aida-stat__label {
+  display: block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #7a7368;
+  margin-bottom: 0.35rem;
+}
+
+.aida-stat__value {
+  display: block;
+  font-size: 1.85rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--aida-black);
+  font-variant-numeric: tabular-nums;
+}
+
+.aida-stat--warn .aida-stat__value {
+  color: var(--aida-warn);
+}
+
+.aida-stat--ok .aida-stat__value {
+  color: var(--aida-ok);
+}
+
+.aida-stat--info .aida-stat__value {
+  color: var(--aida-info);
+}
+
+.aida-stat--bronze .aida-stat__value {
+  color: var(--aida-bronze-deep);
+}
+
+/* Change list polish */
+#changelist .results table thead th {
+  background: #fff;
+  border-bottom: 2px solid rgba(160, 120, 64, 0.25);
+}
+
+#changelist-filter h2,
+#changelist-filter h3 {
+  background: var(--aida-black);
+  color: var(--aida-ivory);
+}
