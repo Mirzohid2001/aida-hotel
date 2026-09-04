@@ -1,8 +1,14 @@
 {% extends "base.html" %}
 {% load i18n static %}
 
-{% block title %}{{ site_settings.site_name }} — {% trans "Luxury Stay" %}{% endblock %}
+{% block title %}{% if site_settings.meta_title %}{{ site_settings.meta_title }}{% else %}{{ site_settings.site_name }} — {% trans "Boutique Hotel in Bukhara" %}{% endif %}{% endblock %}
+{% block og_title %}{% if site_settings.meta_title %}{{ site_settings.meta_title }}{% else %}{{ site_settings.site_name }} — {% trans "Boutique Hotel in Bukhara" %}{% endif %}{% endblock %}
+{% block twitter_title %}{% if site_settings.meta_title %}{{ site_settings.meta_title }}{% else %}{{ site_settings.site_name }} — {% trans "Boutique Hotel in Bukhara" %}{% endif %}{% endblock %}
 {% block body_class %}page-home{% endblock %}
+
+{% block structured_data %}
+{% if seo_faq_jsonld %}<script type="application/ld+json">{{ seo_faq_jsonld|safe }}</script>{% endif %}
+{% endblock %}
 
 {% block content %}
 <section class="hero">
@@ -94,8 +100,8 @@
   <div class="container">
     <div class="section-header">
       <span class="section-eyebrow">{% trans "Accommodations" %}</span>
-      <h2>{% trans "Our Rooms" %}</h2>
-      <p>{% trans "Elegantly appointed spaces designed for comfort and refinement." %}</p>
+      <h2>{% trans "Rooms in Bukhara" %}</h2>
+      <p>{% trans "Comfortable rooms and suites at Aida Hotel in the heart of Bukhara." %}</p>
     </div>
     <div class="card-grid">
       {% for rt in room_types %}

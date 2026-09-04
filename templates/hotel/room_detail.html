@@ -1,7 +1,18 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}{{ room_type.name }} — {{ site_settings.site_name }}{% endblock %}
+{% block title %}{{ room_type.name }} — {{ site_settings.site_name }} {% trans "Bukhara" %}{% endblock %}
+{% block og_title %}{{ room_type.name }} — {{ site_settings.site_name }} {% trans "Bukhara" %}{% endblock %}
+{% block twitter_title %}{{ room_type.name }} — {{ site_settings.site_name }} {% trans "Bukhara" %}{% endblock %}
+{% block meta_description %}{% blocktrans with room=room_type.name name=site_settings.site_name price=room_type.base_price|floatformat:0 currency=site_settings.currency_label %}{{ room }} at {{ name }} in Bukhara. From {{ price }} {{ currency }} per night. Book direct.{% endblocktrans %}{% endblock %}
+{% block og_description %}{% blocktrans with room=room_type.name name=site_settings.site_name price=room_type.base_price|floatformat:0 currency=site_settings.currency_label %}{{ room }} at {{ name }} in Bukhara. From {{ price }} {{ currency }} per night. Book direct.{% endblocktrans %}{% endblock %}
+{% block twitter_description %}{% blocktrans with room=room_type.name name=site_settings.site_name price=room_type.base_price|floatformat:0 currency=site_settings.currency_label %}{{ room }} at {{ name }} in Bukhara. From {{ price }} {{ currency }} per night. Book direct.{% endblocktrans %}{% endblock %}
+{% block og_type %}article{% endblock %}
+
+{% block structured_data %}
+{% if seo_room_jsonld %}<script type="application/ld+json">{{ seo_room_jsonld|safe }}</script>{% endif %}
+{% if seo_breadcrumb_jsonld %}<script type="application/ld+json">{{ seo_breadcrumb_jsonld|safe }}</script>{% endif %}
+{% endblock %}
 
 {% block content %}
 <section class="page-hero page-hero--compact">

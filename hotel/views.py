@@ -1,9 +1,11 @@
 from datetime import datetime
+import json
 
 from django.conf import settings
 from django.contrib import messages
 from django.http import FileResponse, Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.translation import check_for_language, gettext as _
 from django.views.decorators.http import require_GET, require_http_methods
@@ -19,25 +21,32 @@ from hotel.models import (
     NearbyPlace,
     PolicyPage,
     RoomType,
+    SiteSettings,
     StatHighlight,
     Testimonial,
 )
+from hotel.seo import breadcrumb_json_ld, faq_json_ld, room_json_ld
 from hotel.services.availability import get_room_availability
 from hotel.services.booking import BookingError, create_booking
 from hotel.services.pricing import calculate_booking_total, calculate_nights
 
 
 def home(request):
+    faqs = FAQ.objects.filter(is_active=True)
+    faq_payload = faq_json_ld(faqs)
     context = {
         "hero_slides": HeroSlide.objects.filter(is_active=True),
         "about": AboutSection.load(),
         "amenities": Amenity.objects.filter(is_active=True),
         "gallery": GalleryImage.objects.filter(is_active=True)[:8],
         "testimonials": Testimonial.objects.filter(is_active=True)[:6],
-        "faqs": FAQ.objects.filter(is_active=True),
+        "faqs": faqs,
         "stats": StatHighlight.objects.filter(is_active=True),
         "nearby_places": NearbyPlace.objects.filter(is_active=True),
         "room_types": RoomType.objects.filter(is_active=True).prefetch_related("images", "rooms")[:3],
+        "seo_faq_jsonld": (
+            json.dumps(faq_payload, ensure_ascii=False, separators=(",", ":")) if faq_payload else ""
+        ),
     }
     return render(request, "hotel/home.html", context)
 
@@ -58,10 +67,30 @@ def room_detail(request, slug):
         .exclude(pk=room_type.pk)
         .prefetch_related("images")[:3]
     )
+    site = SiteSettings.load()
+    crumbs = breadcrumb_json_ld(
+        request,
+        [
+            (_("Home"), reverse("hotel:home")),
+            (_("Rooms"), reverse("hotel:rooms")),
+            (room_type.name, request.path),
+        ],
+    )
     return render(
         request,
         "hotel/room_detail.html",
-        {"room_type": room_type, "related_room_types": related},
+        {
+            "room_type": room_type,
+            "related_room_types": related,
+            "seo_room_jsonld": json.dumps(
+                room_json_ld(request, site, room_type),
+                ensure_ascii=False,
+                separators=(",", ":"),
+            ),
+            "seo_breadcrumb_jsonld": json.dumps(
+                crumbs, ensure_ascii=False, separators=(",", ":")
+            ),
+        },
     )
 
 
@@ -230,6 +259,11 @@ def robots_txt(request):
         "User-agent: *",
         "Allow: /",
         "Disallow: /admin/",
+        "Disallow: /ru/admin/",
+        "Disallow: /en/admin/",
+        "Disallow: /book/success/",
+        "Disallow: /ru/book/success/",
+        "Disallow: /en/book/success/",
         f"Sitemap: {sitemap_url}",
     ]
     return HttpResponse("\n".join(lines) + "\n", content_type="text/plain")

@@ -5,11 +5,40 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{{ site_settings.meta_title|default:site_settings.site_name }}{% endblock %}</title>
-  {% if site_settings.meta_description %}<meta name="description" content="{{ site_settings.meta_description }}">{% endif %}
-  <meta property="og:type" content="website">
+  <meta name="description" content="{% block meta_description %}{{ seo_description }}{% endblock %}">
+  <meta name="robots" content="{% block robots %}index, follow, max-image-preview:large{% endblock %}">
+  <link rel="canonical" href="{% block canonical %}{{ seo_canonical }}{% endblock %}">
+  {% for code, href in seo_alternates.items %}
+  <link rel="alternate" hreflang="{{ code }}" href="{{ href }}">
+  {% endfor %}
+  <link rel="alternate" hreflang="x-default" href="{{ seo_x_default }}">
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+  <meta property="og:site_name" content="{{ site_settings.site_name }}">
+  <meta property="og:locale" content="{{ seo_og_locale }}">
+  {% for code, href in seo_alternates.items %}
+  {% if code == "uz" %}<meta property="og:locale:alternate" content="uz_UZ">
+  {% elif code == "ru" %}<meta property="og:locale:alternate" content="ru_RU">
+  {% elif code == "en" %}<meta property="og:locale:alternate" content="en_US">
+  {% endif %}
+  {% endfor %}
+  <meta property="og:url" content="{% block og_url %}{{ seo_canonical }}{% endblock %}">
   <meta property="og:title" content="{% block og_title %}{{ site_settings.meta_title|default:site_settings.site_name }}{% endblock %}">
-  {% if site_settings.meta_description %}<meta property="og:description" content="{{ site_settings.meta_description }}">{% endif %}
-  {% if site_settings.og_image %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ site_settings.og_image.url }}">{% elif site_settings.logo %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ site_settings.logo.url }}">{% endif %}
+  <meta property="og:description" content="{% block og_description %}{{ seo_description }}{% endblock %}">
+  {% if site_settings.og_image %}
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ site_settings.og_image.url }}">
+  {% elif site_settings.logo %}
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ site_settings.logo.url }}">
+  {% endif %}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% block twitter_title %}{{ site_settings.meta_title|default:site_settings.site_name }}{% endblock %}">
+  <meta name="twitter:description" content="{% block twitter_description %}{{ seo_description }}{% endblock %}">
+  {% if site_settings.og_image %}
+  <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ site_settings.og_image.url }}">
+  {% elif site_settings.logo %}
+  <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ site_settings.logo.url }}">
+  {% endif %}
+  <script type="application/ld+json">{{ seo_hotel_jsonld|safe }}</script>
+  {% block structured_data %}{% endblock %}
   <link rel="icon" href="/favicon.ico?v=3">
   <link rel="shortcut icon" href="/favicon.ico?v=3">
   <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/brand/favicon-32.png' %}?v=3">
@@ -36,6 +65,7 @@
     (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
     ym({{ site_settings.yandex_metrika_id }}, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true});
   </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/{{ site_settings.yandex_metrika_id }}" style="position:absolute;left:-9999px;" alt=""></div></noscript>
   {% endif %}
   {% block extra_head %}{% endblock %}
 </head>
@@ -45,7 +75,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="{% url 'hotel:home' %}" class="logo logo--has-image">
-        <img src="{% static 'images/brand/aida-logo-header.png' %}" alt="{{ site_settings.site_name }}" class="logo-img" width="176" height="80">
+        <img src="{% static 'images/brand/aida-logo-header.png' %}" alt="{{ site_settings.site_name }} — {% trans 'Bukhara hotel' %}" class="logo-img" width="176" height="80">
       </a>
 
       <nav class="main-nav" aria-label="{% trans 'Main navigation' %}">
@@ -98,7 +128,7 @@
     <div class="container footer-grid">
       <div>
         <a href="{% url 'hotel:home' %}" class="footer-brand">
-          <img src="{% static 'images/brand/aida-mark.png' %}" alt="{{ site_settings.site_name }}" class="footer-logo" width="56" height="56">
+          <img src="{% static 'images/brand/aida-mark.png' %}" alt="{{ site_settings.site_name }} — {% trans 'Bukhara hotel' %}" class="footer-logo" width="56" height="56">
         </a>
         <h3>{{ site_settings.site_name }}</h3>
         <p>{{ site_settings.tagline }}</p>

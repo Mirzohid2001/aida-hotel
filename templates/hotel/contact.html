@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Contact" %} — {{ site_settings.site_name }}{% endblock %}
+{% block title %}{% trans "Contact Aida Hotel Bukhara" %} — {{ site_settings.site_name }}{% endblock %}
+{% block og_title %}{% trans "Contact Aida Hotel Bukhara" %} — {{ site_settings.site_name }}{% endblock %}
+{% block twitter_title %}{% trans "Contact Aida Hotel Bukhara" %} — {{ site_settings.site_name }}{% endblock %}
+{% block meta_description %}{% blocktrans with name=site_settings.site_name %}Contact {{ name }} in Bukhara — phone, address, map and booking help.{% endblocktrans %}{% endblock %}
+{% block og_description %}{% blocktrans with name=site_settings.site_name %}Contact {{ name }} in Bukhara — phone, address, map and booking help.{% endblocktrans %}{% endblock %}
+{% block twitter_description %}{% blocktrans with name=site_settings.site_name %}Contact {{ name }} in Bukhara — phone, address, map and booking help.{% endblocktrans %}{% endblock %}
 
 {% block content %}
 <section class="page-hero">

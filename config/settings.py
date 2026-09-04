@@ -78,6 +78,7 @@ TEMPLATES = [
                 "hotel.context_processors.site_settings",
                 "hotel.context_processors.active_promotion",
                 "hotel.context_processors.policy_pages",
+                "hotel.context_processors.seo",
             ],
         },
     },

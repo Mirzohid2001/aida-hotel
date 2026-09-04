@@ -104,16 +104,16 @@ class Command(BaseCommand):
         set_i18n(
             s,
             "meta_title",
-            "Aida Hotel — Buxoro",
-            "Aida Hotel — Бухара",
-            "Aida Hotel — Bukhara",
+            "Aida Hotel Buxoro — boutique mehmonxona | Bron qiling",
+            "Aida Hotel Бухара — бутик-отель в центре | Забронировать",
+            "Aida Hotel Bukhara — Boutique Hotel | Book Direct",
         )
         set_i18n(
             s,
             "meta_description",
-            "Aida Hotel — Buxoro markazidagi premium mehmonxona.",
-            "Aida Hotel — премиальный отель в центре Бухары.",
-            "Aida Hotel — premium hotel in central Bukhara.",
+            "Aida Hotel — Buxoro tarixiy markazidagi boutique mehmonxona. Qulay xonalar, hovli muhiti. Onlayn bron.",
+            "Aida Hotel — бутик-отель в историческом центре Бухары. Комфортные номера, атмосфера дворика. Онлайн-бронирование.",
+            "Aida Hotel — boutique hotel in historic Bukhara. Comfortable rooms, courtyard atmosphere. Book online.",
         )
         s.save()
         self.stdout.write("  Site settings")
