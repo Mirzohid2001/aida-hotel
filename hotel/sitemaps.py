@@ -1,57 +1,57 @@
 from django.conf import settings
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
-from django.utils import translation
 
 from hotel.models import PolicyPage, RoomType
 
-
-def _localized_url(lang: str, viewname: str, kwargs=None) -> str:
-    with translation.override(lang):
-        return reverse(viewname, kwargs=kwargs or {})
+_LANGUAGES = [code for code, _ in settings.LANGUAGES]
 
 
 class StaticViewSitemap(Sitemap):
-    priority = 0.9
     changefreq = "weekly"
     protocol = "https"
+    i18n = True
+    languages = _LANGUAGES
+    alternates = True
+    x_default = True
 
     def items(self):
-        pages = ["hotel:home", "hotel:rooms", "hotel:book", "hotel:contact"]
-        return [(lang, name) for lang, _ in settings.LANGUAGES for name in pages]
+        return ["hotel:home", "hotel:rooms", "hotel:book", "hotel:contact"]
 
     def location(self, item):
-        lang, name = item
-        return _localized_url(lang, name)
+        return reverse(item)
 
     def priority(self, item):
-        _lang, name = item
-        return 1.0 if name == "hotel:home" else 0.8
+        return 1.0 if item == "hotel:home" else 0.8
 
 
 class RoomTypeSitemap(Sitemap):
     changefreq = "weekly"
     priority = 0.75
     protocol = "https"
+    i18n = True
+    languages = _LANGUAGES
+    alternates = True
+    x_default = True
 
     def items(self):
-        rooms = list(RoomType.objects.filter(is_active=True))
-        return [(lang, room) for lang, _ in settings.LANGUAGES for room in rooms]
+        return RoomType.objects.filter(is_active=True)
 
     def location(self, item):
-        lang, room = item
-        return _localized_url(lang, "hotel:room_detail", {"slug": room.slug})
+        return reverse("hotel:room_detail", kwargs={"slug": item.slug})
 
 
 class PolicyPageSitemap(Sitemap):
     changefreq = "monthly"
     priority = 0.35
     protocol = "https"
+    i18n = True
+    languages = _LANGUAGES
+    alternates = True
+    x_default = True
 
     def items(self):
-        pages = list(PolicyPage.objects.filter(is_active=True))
-        return [(lang, page) for lang, _ in settings.LANGUAGES for page in pages]
+        return PolicyPage.objects.filter(is_active=True)
 
     def location(self, item):
-        lang, page = item
-        return _localized_url(lang, "hotel:policy", {"slug": page.slug})
+        return reverse("hotel:policy", kwargs={"slug": item.slug})

@@ -54,6 +54,9 @@ class SeoTests(TestCase):
         self.assertContains(sitemap, "/rooms/deluxe/")
         self.assertContains(sitemap, "/ru/")
         self.assertContains(sitemap, "/en/")
+        self.assertContains(sitemap, 'rel="alternate"')
+        self.assertContains(sitemap, "xhtml:link")
+        self.assertContains(sitemap, 'hreflang="x-default"')
 
     def test_booking_success_is_noindex(self):
         from datetime import date
