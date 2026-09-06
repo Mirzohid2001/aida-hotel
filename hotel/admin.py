@@ -96,7 +96,7 @@ class SiteSettingsAdmin(SingletonAdmin):
             {
                 "fields": ("currency",),
                 "description": _(
-                    "Choose UZS or USD ($). This label is shown on all room prices."
+                    "Choose UZS (so'm), USD ($), or EUR (€). Shown on room prices and saved on new bookings."
                 ),
             },
         ),
@@ -367,7 +367,7 @@ class RoomTypeAdmin(admin.ModelAdmin):
             {
                 "fields": ("base_price", "capacity", "size_sqm"),
                 "description": _(
-                    "Enter the nightly price as a number. Set UZS or USD ($) under "
+                    "Enter the nightly price as a number. Set UZS, USD ($), or EUR (€) under "
                     "Site settings → Pricing."
                 ),
             },
@@ -377,8 +377,8 @@ class RoomTypeAdmin(admin.ModelAdmin):
 
     @admin.display(description=_("Base price"), ordering="base_price")
     def base_price_display(self, obj):
-        label = SiteSettings.load().currency_label
-        return f"{obj.base_price} {label}"
+        site = SiteSettings.load()
+        return site.format_money(obj.base_price)
 
     @admin.display(description=_("Rooms"))
     def room_count(self, obj):
@@ -425,10 +425,11 @@ class BookingAdmin(admin.ModelAdmin):
         "stay_dates",
         "guests_count",
         "status_badge",
-        "estimated_total",
+        "total_display",
+        "currency",
         "created_at",
     )
-    list_filter = ("status", "check_in", "created_at")
+    list_filter = ("status", "currency", "check_in", "created_at")
     search_fields = ("reference_code", "guest_name", "email", "phone")
     readonly_fields = (
         "reference_code",
@@ -436,6 +437,7 @@ class BookingAdmin(admin.ModelAdmin):
         "updated_at",
         "estimated_total",
         "status_badge",
+        "total_display",
     )
     date_hierarchy = "check_in"
     inlines = [BookingRoomInline]
@@ -452,7 +454,12 @@ class BookingAdmin(admin.ModelAdmin):
         ),
         (
             _("Status & total"),
-            {"fields": ("status", "estimated_total", "notes")},
+            {
+                "fields": ("status", "estimated_total", "currency", "notes"),
+                "description": _(
+                    "Currency can be UZS, USD ($), or EUR (€). Change it if the guest pays in another currency."
+                ),
+            },
         ),
         (
             _("System"),
@@ -467,6 +474,10 @@ class BookingAdmin(admin.ModelAdmin):
             obj.check_in.strftime("%d.%m.%Y"),
             obj.check_out.strftime("%d.%m.%Y"),
         )
+
+    @admin.display(description=_("Total"), ordering="estimated_total")
+    def total_display(self, obj):
+        return obj.format_total()
 
     @admin.display(description=_("Status"), ordering="status")
     def status_badge(self, obj):

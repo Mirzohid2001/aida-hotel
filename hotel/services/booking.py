@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.utils.translation import gettext_lazy as _
 
-from hotel.models import Booking, BookingRoom, Room, RoomType
+from hotel.models import Booking, BookingRoom, Room, RoomType, SiteSettings
 from hotel.services.availability import get_available_rooms, is_room_available
 from hotel.services.pricing import calculate_booking_total, calculate_nights, get_nightly_rate
 from hotel.services.references import generate_reference_code
@@ -66,6 +66,7 @@ def create_booking(
         check_out=check_out,
         special_requests=special_requests,
         estimated_total=total,
+        currency=SiteSettings.load().currency,
         status=Booking.Status.PENDING,
     )
 

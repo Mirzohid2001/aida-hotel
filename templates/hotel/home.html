@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n static %}
+{% load i18n static money_tags %}
 
 {% block title %}{% if site_settings.meta_title %}{{ site_settings.meta_title }}{% else %}{{ site_settings.site_name }} — {% trans "Boutique Hotel in Bukhara" %}{% endif %}{% endblock %}
 {% block og_title %}{% if site_settings.meta_title %}{{ site_settings.meta_title }}{% else %}{{ site_settings.site_name }} — {% trans "Boutique Hotel in Bukhara" %}{% endif %}{% endblock %}
@@ -112,7 +112,7 @@
           {% endwith %}
         </div>
         <div class="room-card-body">
-          <span class="price-badge">{% trans "From" %} {{ rt.base_price|floatformat:0 }} {{ site_settings.currency_label }}</span>
+          <span class="price-badge">{% trans "From" %} {{ rt.base_price|money:site_settings.currency }}</span>
           <h3>{{ rt.name }}</h3>
           <p>{{ rt.description|truncatewords:15 }}</p>
         </div>

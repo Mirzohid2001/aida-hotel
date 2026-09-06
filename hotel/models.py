@@ -6,6 +6,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from hotel.utils import OptimizeImagesMixin
+from hotel.utils.currency import Currency, currency_label, format_money
 
 
 class TimeStampedModel(models.Model):
@@ -17,9 +18,7 @@ class TimeStampedModel(models.Model):
 
 
 class SiteSettings(OptimizeImagesMixin, models.Model):
-    class Currency(models.TextChoices):
-        UZS = "UZS", _("UZS (so'm)")
-        USD = "USD", _("USD ($)")
+    Currency = Currency
 
     image_optimize_fields = ("logo", "og_image")
     image_max_side = 1200
@@ -36,7 +35,9 @@ class SiteSettings(OptimizeImagesMixin, models.Model):
         max_length=3,
         choices=Currency.choices,
         default=Currency.UZS,
-        help_text=_("Shown next to all room prices on the website and in admin."),
+        help_text=_(
+            "Default currency for room prices and new bookings: UZS, USD ($), or EUR (€)."
+        ),
     )
     check_in_time = models.CharField(_("Check-in time"), max_length=16, default="14:00")
     check_out_time = models.CharField(_("Check-out time"), max_length=16, default="12:00")
@@ -81,9 +82,10 @@ class SiteSettings(OptimizeImagesMixin, models.Model):
 
     @property
     def currency_label(self):
-        if self.currency == self.Currency.USD:
-            return "$"
-        return "UZS"
+        return currency_label(self.currency)
+
+    def format_money(self, amount) -> str:
+        return format_money(amount, self.currency)
 
     def save(self, *args, **kwargs):
         self.pk = 1
@@ -304,7 +306,7 @@ class RoomType(models.Model):
         _("Base price"),
         max_digits=10,
         decimal_places=2,
-        help_text=_("Per night. Currency is set in Site settings (UZS or USD)."),
+        help_text=_("Per night. Currency is set in Site settings (UZS, USD, or EUR)."),
     )
     capacity = models.PositiveSmallIntegerField(_("Capacity"), default=2)
     size_sqm = models.PositiveSmallIntegerField(_("Size (m²)"), null=True, blank=True)
@@ -446,6 +448,13 @@ class Booking(TimeStampedModel):
     estimated_total = models.DecimalField(
         _("Estimated total"), max_digits=12, decimal_places=2, default=Decimal("0.00")
     )
+    currency = models.CharField(
+        _("Currency"),
+        max_length=3,
+        choices=Currency.choices,
+        default=Currency.UZS,
+        help_text=_("Currency for this booking total (UZS, USD, or EUR)."),
+    )
     status = models.CharField(
         _("Status"), max_length=16, choices=Status.choices, default=Status.PENDING
     )
@@ -461,6 +470,13 @@ class Booking(TimeStampedModel):
 
     def __str__(self):
         return self.reference_code
+
+    @property
+    def currency_label(self):
+        return currency_label(self.currency)
+
+    def format_total(self) -> str:
+        return format_money(self.estimated_total, self.currency)
 
     def clean(self):
         if self.check_out <= self.check_in:
