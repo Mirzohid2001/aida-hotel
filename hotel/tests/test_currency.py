@@ -17,7 +17,7 @@ class CurrencyTests(TestCase):
         self.room = Room.objects.create(room_type=self.room_type, number="501")
 
     def test_format_money_labels(self):
-        self.assertEqual(format_money(Decimal("100000"), Currency.UZS), "100000 UZS")
+        self.assertEqual(format_money(Decimal("100000"), Currency.UZS), "100 000 UZS")
         self.assertEqual(format_money(Decimal("85.5"), Currency.USD), "85.50 $")
         self.assertEqual(format_money(Decimal("70"), Currency.EUR), "70.00 €")
 
