@@ -62,6 +62,10 @@ def send_telegram_message(*, bot_token: str, chat_id: str, text: str) -> bool:
                 logger.warning("Telegram API error: %s", body)
                 return False
             return True
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")[:500]
+        logger.warning("Failed to send Telegram notification: HTTP %s %s", exc.code, detail)
+        return False
     except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
         logger.warning("Failed to send Telegram notification: %s", exc)
         return False

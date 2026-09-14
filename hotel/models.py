@@ -62,7 +62,11 @@ class SiteSettings(OptimizeImagesMixin, models.Model):
         _("Telegram chat ID"),
         max_length=64,
         blank=True,
-        help_text=_("Group or channel chat ID, e.g. -1001234567890"),
+        help_text=_(
+            "Group chat ID, usually starts with -100 (NOT the bot token/ID). "
+            "Add the bot to the group, send a message, then open "
+            "https://api.telegram.org/bot<TOKEN>/getUpdates and copy chat.id"
+        ),
     )
     telegram_notifications_enabled = models.BooleanField(
         _("Telegram notifications"),
@@ -90,6 +94,21 @@ class SiteSettings(OptimizeImagesMixin, models.Model):
     def save(self, *args, **kwargs):
         self.pk = 1
         super().save(*args, **kwargs)
+
+    def clean(self):
+        token = (self.telegram_bot_token or "").strip()
+        chat = (self.telegram_chat_id or "").strip()
+        if token and chat:
+            bot_id = token.split(":", 1)[0]
+            if chat == bot_id or chat.lstrip("-") == bot_id:
+                raise ValidationError(
+                    {
+                        "telegram_chat_id": _(
+                            "This looks like the bot ID, not a group chat ID. "
+                            "Group IDs usually look like -1001234567890."
+                        )
+                    }
+                )
 
     @classmethod
     def load(cls):
