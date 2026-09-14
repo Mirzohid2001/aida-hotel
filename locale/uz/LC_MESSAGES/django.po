@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-04 21:39+0500\n"
+"POT-Creation-Date: 2026-09-14 12:21+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,7 +37,7 @@ msgstr "Aida Hotel — Buxoro CMS"
 msgid "Website"
 msgstr "Sayt"
 
-#: config/settings.py:163 hotel/models.py:460
+#: config/settings.py:163 hotel/models.py:488
 msgid "Bookings"
 msgstr "Bronlar"
 
@@ -49,10 +49,10 @@ msgstr "Xabarlar"
 msgid "Settings"
 msgstr "Sozlamalar"
 
-#: hotel/admin.py:44 hotel/models.py:111 hotel/models.py:151
-#: hotel/models.py:173 hotel/models.py:189 hotel/models.py:204
-#: hotel/models.py:219 hotel/models.py:236 hotel/models.py:252
-#: hotel/models.py:267 hotel/models.py:311 hotel/models.py:337
+#: hotel/admin.py:44 hotel/models.py:132 hotel/models.py:172
+#: hotel/models.py:194 hotel/models.py:210 hotel/models.py:225
+#: hotel/models.py:240 hotel/models.py:257 hotel/models.py:273
+#: hotel/models.py:288 hotel/models.py:332 hotel/models.py:358
 msgid "Active"
 msgstr "Faol"
 
@@ -76,7 +76,9 @@ msgid "Pricing"
 msgstr "Narx"
 
 #: hotel/admin.py:99
-msgid "Choose UZS or USD ($). This label is shown on all room prices."
+msgid ""
+"Choose UZS (so'm), USD ($), or EUR (€). Shown on room prices and saved on "
+"new bookings."
 msgstr ""
 
 #: hotel/admin.py:104 templates/base.html:150 templates/hotel/contact.html:47
@@ -91,7 +93,7 @@ msgstr "Xarita"
 msgid "Social links"
 msgstr "Ijtimoiy tarmoqlar"
 
-#: hotel/admin.py:116 hotel/models.py:67
+#: hotel/admin.py:116 hotel/models.py:72
 msgid "Telegram notifications"
 msgstr "Telegram bildirishnomalar"
 
@@ -120,12 +122,12 @@ msgstr "Harakat tugmasi"
 msgid "Display"
 msgstr "Ko'rsatish"
 
-#: hotel/admin.py:171 hotel/admin.py:195 hotel/models.py:104
-#: hotel/models.py:127 hotel/models.py:167 hotel/models.py:359
+#: hotel/admin.py:171 hotel/admin.py:195 hotel/models.py:125
+#: hotel/models.py:148 hotel/models.py:188 hotel/models.py:380
 msgid "Image"
 msgstr "Rasm"
 
-#: hotel/admin.py:210 hotel/models.py:187 templates/hotel/home.html:185
+#: hotel/admin.py:210 hotel/models.py:208 templates/hotel/home.html:185
 msgid "Rating"
 msgstr "Reyting"
 
@@ -133,8 +135,9 @@ msgstr "Reyting"
 msgid "Schedule"
 msgstr "Jadval"
 
-#: hotel/admin.py:262 hotel/admin.py:284 hotel/admin.py:402 hotel/admin.py:471
-#: hotel/models.py:450 templates/hotel/booking_success.html:27
+#: hotel/admin.py:262 hotel/admin.py:284 hotel/admin.py:402 hotel/admin.py:482
+#: hotel/models.py:478 hotel/services/telegram.py:48
+#: templates/hotel/booking_success.html:27
 msgid "Status"
 msgstr "Holat"
 
@@ -142,7 +145,7 @@ msgstr "Holat"
 msgid "Sender"
 msgstr "Yuboruvchi"
 
-#: hotel/admin.py:280 hotel/forms.py:102 hotel/models.py:287
+#: hotel/admin.py:280 hotel/forms.py:102 hotel/models.py:308
 msgid "Message"
 msgstr "Xabar"
 
@@ -150,7 +153,7 @@ msgstr "Xabar"
 msgid "Meta"
 msgstr "Meta"
 
-#: hotel/admin.py:287 hotel/models.py:288
+#: hotel/admin.py:287 hotel/models.py:309
 msgid "Read"
 msgstr "O'qilgan"
 
@@ -182,77 +185,88 @@ msgstr "Narx va sig'im"
 
 #: hotel/admin.py:370
 msgid ""
-"Enter the nightly price as a number. Set UZS or USD ($) under Site settings "
-"→ Pricing."
+"Enter the nightly price as a number. Set UZS, USD ($), or EUR (€) under Site"
+" settings → Pricing."
 msgstr ""
 
-#: hotel/admin.py:378 hotel/models.py:304
+#: hotel/admin.py:378 hotel/models.py:325
 msgid "Base price"
 msgstr "Asosiy narx"
 
-#: hotel/admin.py:383 hotel/models.py:343 hotel/models.py:454
-#: hotel/services/telegram.py:33 hotel/views.py:75 templates/base.html:83
+#: hotel/admin.py:383 hotel/models.py:364 hotel/models.py:482
+#: hotel/services/telegram.py:61 hotel/views.py:75 templates/base.html:83
 #: templates/base.html:100
 msgid "Rooms"
 msgstr "Xonalar"
 
-#: hotel/admin.py:446 hotel/services/telegram.py:26
+#: hotel/admin.py:448 hotel/services/telegram.py:51
 #: templates/hotel/booking_success.html:23
 msgid "Guest"
 msgstr "Mehmon"
 
-#: hotel/admin.py:450
+#: hotel/admin.py:452 hotel/services/telegram.py:56
 msgid "Stay"
-msgstr "Qolish"
+msgstr "Yashash"
 
-#: hotel/admin.py:454
+#: hotel/admin.py:456
 msgid "Status & total"
 msgstr "Holat va summa"
 
-#: hotel/admin.py:458
+#: hotel/admin.py:460
+msgid ""
+"Currency can be UZS, USD ($), or EUR (€). Change it if the guest pays in "
+"another currency."
+msgstr ""
+
+#: hotel/admin.py:465
 msgid "System"
 msgstr "Tizim"
 
-#: hotel/admin.py:463
+#: hotel/admin.py:470
 msgid "Dates"
 msgstr "Sanalar"
 
-#: hotel/admin.py:475
+#: hotel/admin.py:478 hotel/services/telegram.py:65
+#: templates/hotel/partials/price_summary.html:6
+msgid "Total"
+msgstr "Jami"
+
+#: hotel/admin.py:486
 msgid "Confirm selected bookings"
 msgstr "Tanlangan bronlarni tasdiqlash"
 
-#: hotel/admin.py:482
+#: hotel/admin.py:493
 #, python-format
 msgid "%(count)d booking(s) confirmed."
 msgstr "%(count)d ta bron tasdiqlandi."
 
-#: hotel/admin.py:486
+#: hotel/admin.py:497
 msgid "Cancel selected bookings"
 msgstr "Tanlangan bronlarni bekor qilish"
 
-#: hotel/admin.py:493
+#: hotel/admin.py:504
 #, python-format
 msgid "%(count)d booking(s) cancelled."
 msgstr "%(count)d ta bron bekor qilindi."
 
-#: hotel/admin.py:497
+#: hotel/admin.py:508
 msgid "Mark selected as completed"
 msgstr "Tanlanganlarni yakunlangan qilish"
 
-#: hotel/admin.py:502
+#: hotel/admin.py:513
 #, python-format
 msgid "%(count)d booking(s) completed."
 msgstr "%(count)d ta bron yakunlandi."
 
-#: hotel/admin.py:541 templates/hotel/book.html:140
+#: hotel/admin.py:552 templates/hotel/book.html:140
 msgid "Aida Hotel"
 msgstr "Aida Hotel"
 
-#: hotel/admin.py:542 hotel/apps.py:8
+#: hotel/admin.py:553 hotel/apps.py:8
 msgid "Aida Hotel CMS"
 msgstr "Aida Hotel CMS"
 
-#: hotel/admin.py:543 templates/admin/index.html:7
+#: hotel/admin.py:554 templates/admin/index.html:7
 #: templates/admin/index.html:12
 msgid "Dashboard"
 msgstr "Boshqaruv paneli"
@@ -261,19 +275,19 @@ msgstr "Boshqaruv paneli"
 msgid "Invalid submission."
 msgstr "Noto'g'ri yuborish."
 
-#: hotel/forms.py:27 hotel/models.py:316 hotel/models.py:333
-#: hotel/models.py:356 hotel/models.py:381
+#: hotel/forms.py:27 hotel/models.py:337 hotel/models.py:354
+#: hotel/models.py:377 hotel/models.py:402
 msgid "Room type"
 msgstr "Xona turi"
 
-#: hotel/forms.py:31 hotel/models.py:443 hotel/services/telegram.py:30
+#: hotel/forms.py:31 hotel/models.py:464 hotel/services/telegram.py:57
 #: templates/base.html:151 templates/hotel/book.html:133
 #: templates/hotel/book.html:150 templates/hotel/booking_success.html:24
 #: templates/hotel/contact.html:48 templates/hotel/home.html:57
 msgid "Check-in"
 msgstr "Kirish"
 
-#: hotel/forms.py:35 hotel/models.py:444 hotel/services/telegram.py:31
+#: hotel/forms.py:35 hotel/models.py:465 hotel/services/telegram.py:58
 #: templates/base.html:152 templates/hotel/book.html:133
 #: templates/hotel/book.html:154 templates/hotel/booking_success.html:25
 #: templates/hotel/contact.html:48 templates/hotel/home.html:57
@@ -284,23 +298,23 @@ msgstr "Chiqish"
 msgid "Full name"
 msgstr "To'liq ism"
 
-#: hotel/forms.py:39 hotel/forms.py:100 hotel/models.py:32 hotel/models.py:285
-#: hotel/models.py:440 hotel/services/telegram.py:28
+#: hotel/forms.py:39 hotel/forms.py:100 hotel/models.py:31 hotel/models.py:306
+#: hotel/models.py:461 hotel/services/telegram.py:53
 #: templates/hotel/contact.html:36
 msgid "Email"
 msgstr "Elektron pochta"
 
-#: hotel/forms.py:40 hotel/forms.py:101 hotel/models.py:31 hotel/models.py:286
-#: hotel/models.py:441 hotel/services/telegram.py:27
+#: hotel/forms.py:40 hotel/forms.py:101 hotel/models.py:30 hotel/models.py:307
+#: hotel/models.py:462 hotel/services/telegram.py:52
 #: templates/hotel/contact.html:30
 msgid "Phone"
 msgstr "Telefon"
 
-#: hotel/forms.py:41 hotel/models.py:442 hotel/services/telegram.py:29
+#: hotel/forms.py:41 hotel/models.py:463 hotel/services/telegram.py:54
 msgid "Guests"
 msgstr "Mehmonlar"
 
-#: hotel/forms.py:45 hotel/models.py:445 hotel/services/telegram.py:38
+#: hotel/forms.py:45 hotel/models.py:466 hotel/services/telegram.py:73
 msgid "Special requests"
 msgstr "Maxsus so'rovlar"
 
@@ -316,418 +330,424 @@ msgstr "Kamida bitta bo'sh xonani tanlang."
 msgid "Selected rooms are not available for these dates."
 msgstr "Tanlangan xonalar bu sanalar uchun mavjud emas."
 
-#: hotel/forms.py:99 hotel/models.py:147 hotel/models.py:248
-#: hotel/models.py:284 hotel/models.py:300
+#: hotel/forms.py:99 hotel/models.py:168 hotel/models.py:269
+#: hotel/models.py:305 hotel/models.py:321
 msgid "Name"
 msgstr "Nomi"
 
-#: hotel/models.py:12
+#: hotel/models.py:13
 msgid "Created at"
 msgstr "Yaratilgan"
 
-#: hotel/models.py:13
+#: hotel/models.py:14
 msgid "Updated at"
 msgstr "Yangilangan"
 
-#: hotel/models.py:21
-msgid "UZS (so'm)"
-msgstr ""
-
-#: hotel/models.py:22
-msgid "USD ($)"
-msgstr ""
-
-#: hotel/models.py:28
+#: hotel/models.py:27
 msgid "Site name"
 msgstr "Sayt nomi"
 
-#: hotel/models.py:29
+#: hotel/models.py:28
 msgid "Tagline"
 msgstr "Shior"
 
-#: hotel/models.py:30
+#: hotel/models.py:29
 msgid "Logo"
 msgstr "Logo"
 
-#: hotel/models.py:33 templates/hotel/contact.html:42
+#: hotel/models.py:32 templates/hotel/contact.html:42
 msgid "Address"
 msgstr "Manzil"
 
-#: hotel/models.py:35
+#: hotel/models.py:34 hotel/models.py:471
 msgid "Currency"
 msgstr ""
 
 #: hotel/models.py:39
-msgid "Shown next to all room prices on the website and in admin."
+msgid ""
+"Default currency for room prices and new bookings: UZS, USD ($), or EUR (€)."
 msgstr ""
 
-#: hotel/models.py:41
+#: hotel/models.py:42
 msgid "Check-in time"
 msgstr "Kirish vaqti"
 
-#: hotel/models.py:42
+#: hotel/models.py:43
 msgid "Check-out time"
 msgstr "Chiqish vaqti"
 
-#: hotel/models.py:44
+#: hotel/models.py:45
 msgid "Map latitude"
 msgstr "Kenglik"
 
-#: hotel/models.py:47
+#: hotel/models.py:48
 msgid "Map longitude"
 msgstr "Uzunlik"
 
-#: hotel/models.py:49
+#: hotel/models.py:50
 msgid "Facebook URL"
 msgstr "Facebook havolasi"
 
-#: hotel/models.py:50
+#: hotel/models.py:51
 msgid "Instagram URL"
 msgstr "Instagram havolasi"
 
-#: hotel/models.py:51
+#: hotel/models.py:52
 msgid "Telegram URL"
 msgstr "Telegram havolasi"
 
-#: hotel/models.py:52
+#: hotel/models.py:53
 msgid "Google Analytics ID"
 msgstr "Google Analytics ID"
 
-#: hotel/models.py:53
+#: hotel/models.py:54
 msgid "Yandex Metrika ID"
 msgstr "Yandex Metrika ID"
 
-#: hotel/models.py:55
+#: hotel/models.py:56
 msgid "Telegram bot token"
 msgstr "Telegram bot token"
 
-#: hotel/models.py:58
+#: hotel/models.py:59
 msgid "From @BotFather, e.g. 123456789:ABCdef..."
 msgstr "@BotFather dan, masalan 123456789:ABCdef..."
 
-#: hotel/models.py:61
+#: hotel/models.py:62
 msgid "Telegram chat ID"
 msgstr "Telegram chat ID"
 
-#: hotel/models.py:64
-msgid "Group or channel chat ID, e.g. -1001234567890"
-msgstr "Guruh yoki kanal chat ID, masalan -1001234567890"
+#: hotel/models.py:66
+msgid ""
+"Group chat ID, usually starts with -100 (NOT the bot token/ID). Add the bot "
+"to the group, send a message, then open "
+"https://api.telegram.org/bot<TOKEN>/getUpdates and copy chat.id"
+msgstr ""
 
-#: hotel/models.py:69
+#: hotel/models.py:74
 msgid "Send a Telegram message when a new booking is submitted."
 msgstr "Yangi bron kelganda Telegram xabar yuborish."
 
-#: hotel/models.py:71
+#: hotel/models.py:76
 msgid "Meta title"
 msgstr "Meta sarlavha"
 
-#: hotel/models.py:72
+#: hotel/models.py:77
 msgid "Meta description"
 msgstr "Meta tavsif"
 
-#: hotel/models.py:73
+#: hotel/models.py:78
 msgid "OG image"
 msgstr "OG rasm"
 
-#: hotel/models.py:76 hotel/models.py:77
+#: hotel/models.py:81 hotel/models.py:82
 msgid "Site settings"
 msgstr "Sayt sozlamalari"
 
-#: hotel/models.py:101 hotel/models.py:125 hotel/models.py:165
-#: hotel/models.py:216 hotel/models.py:264
+#: hotel/models.py:107
+msgid ""
+"This looks like the bot ID, not a group chat ID. Group IDs usually look like"
+" -1001234567890."
+msgstr ""
+
+#: hotel/models.py:122 hotel/models.py:146 hotel/models.py:186
+#: hotel/models.py:237 hotel/models.py:285
 msgid "Title"
 msgstr "Sarlavha"
 
-#: hotel/models.py:102
+#: hotel/models.py:123
 msgid "Subtitle"
 msgstr "Taglavha"
 
-#: hotel/models.py:106 hotel/models.py:169 hotel/models.py:361
+#: hotel/models.py:127 hotel/models.py:190 hotel/models.py:382
 msgid "Large photos are auto-resized (max ~1920px) to speed up upload."
 msgstr ""
 
-#: hotel/models.py:108
+#: hotel/models.py:129
 msgid "CTA text"
 msgstr "Tugma matni"
 
-#: hotel/models.py:109
+#: hotel/models.py:130
 msgid "CTA URL"
 msgstr "Tugma havolasi"
 
-#: hotel/models.py:110 hotel/models.py:150 hotel/models.py:172
-#: hotel/models.py:188 hotel/models.py:203 hotel/models.py:235
-#: hotel/models.py:251 hotel/models.py:312 hotel/models.py:364
+#: hotel/models.py:131 hotel/models.py:171 hotel/models.py:193
+#: hotel/models.py:209 hotel/models.py:224 hotel/models.py:256
+#: hotel/models.py:272 hotel/models.py:333 hotel/models.py:385
 msgid "Ordering"
 msgstr "Tartib"
 
-#: hotel/models.py:115
+#: hotel/models.py:136
 msgid "Hero slide"
 msgstr "Banner slayd"
 
-#: hotel/models.py:116 templates/hotel/home.html:31
+#: hotel/models.py:137 templates/hotel/home.html:31
 msgid "Hero slides"
 msgstr "Banner slaydlar"
 
-#: hotel/models.py:126 hotel/models.py:186 hotel/models.py:266
+#: hotel/models.py:147 hotel/models.py:207 hotel/models.py:287
 msgid "Content"
 msgstr "Matn"
 
-#: hotel/models.py:130 hotel/models.py:131
+#: hotel/models.py:151 hotel/models.py:152
 msgid "About section"
 msgstr "Biz haqimizda"
 
-#: hotel/models.py:148 hotel/models.py:217 hotel/models.py:302
+#: hotel/models.py:169 hotel/models.py:238 hotel/models.py:323
 msgid "Description"
 msgstr "Tavsif"
 
-#: hotel/models.py:149 hotel/models.py:250
+#: hotel/models.py:170 hotel/models.py:271
 msgid "Icon"
 msgstr "Ikonka"
 
-#: hotel/models.py:155
+#: hotel/models.py:176
 msgid "Amenity"
 msgstr "Qulaylik"
 
-#: hotel/models.py:156 templates/hotel/home.html:134
+#: hotel/models.py:177 templates/hotel/home.html:134
 msgid "Amenities"
 msgstr "Qulayliklar"
 
-#: hotel/models.py:171 hotel/models.py:363
+#: hotel/models.py:192 hotel/models.py:384
 msgid "Caption"
 msgstr "Izoh"
 
-#: hotel/models.py:177
+#: hotel/models.py:198
 msgid "Gallery image"
 msgstr "Galereya rasmi"
 
-#: hotel/models.py:178
+#: hotel/models.py:199
 msgid "Gallery images"
 msgstr "Galereya rasmlari"
 
-#: hotel/models.py:185 hotel/models.py:439
+#: hotel/models.py:206 hotel/models.py:460
 msgid "Guest name"
 msgstr "Mehmon ismi"
 
-#: hotel/models.py:193
+#: hotel/models.py:214
 msgid "Testimonial"
 msgstr "Sharh"
 
-#: hotel/models.py:194 templates/hotel/home.html:178
+#: hotel/models.py:215 templates/hotel/home.html:178
 msgid "Testimonials"
 msgstr "Sharhlar"
 
-#: hotel/models.py:201
+#: hotel/models.py:222
 msgid "Question"
 msgstr "Savol"
 
-#: hotel/models.py:202
+#: hotel/models.py:223
 msgid "Answer"
 msgstr "Javob"
 
-#: hotel/models.py:208 templates/hotel/home.html:221
+#: hotel/models.py:229 templates/hotel/home.html:221
 msgid "FAQ"
 msgstr "Savol-javob"
 
-#: hotel/models.py:209
+#: hotel/models.py:230
 msgid "FAQs"
 msgstr "Tez-tez so'raladigan savollar"
 
-#: hotel/models.py:218
+#: hotel/models.py:239
 msgid "Discount label"
 msgstr "Chegirma yorlig'i"
 
-#: hotel/models.py:220
+#: hotel/models.py:241
 msgid "Starts at"
 msgstr "Boshlanish"
 
-#: hotel/models.py:221
+#: hotel/models.py:242
 msgid "Ends at"
 msgstr "Tugash"
 
-#: hotel/models.py:225
+#: hotel/models.py:246
 msgid "Promotion"
 msgstr "Aksiya"
 
-#: hotel/models.py:226
+#: hotel/models.py:247
 msgid "Promotions"
 msgstr "Aksiyalar"
 
-#: hotel/models.py:233
+#: hotel/models.py:254
 msgid "Value"
 msgstr "Qiymat"
 
-#: hotel/models.py:234
+#: hotel/models.py:255
 msgid "Label"
 msgstr "Yorliq"
 
-#: hotel/models.py:240
+#: hotel/models.py:261
 msgid "Stat highlight"
 msgstr "Statistika"
 
-#: hotel/models.py:241
+#: hotel/models.py:262
 msgid "Stat highlights"
 msgstr "Statistikalar"
 
-#: hotel/models.py:249
+#: hotel/models.py:270
 msgid "Distance"
 msgstr "Masofa"
 
-#: hotel/models.py:256
+#: hotel/models.py:277
 msgid "Nearby place"
 msgstr "Yaqin joy"
 
-#: hotel/models.py:257
+#: hotel/models.py:278
 msgid "Nearby places"
 msgstr "Yaqin joylar"
 
-#: hotel/models.py:265 hotel/models.py:301
+#: hotel/models.py:286 hotel/models.py:322
 msgid "Slug"
 msgstr "Slug"
 
-#: hotel/models.py:271
+#: hotel/models.py:292
 msgid "Policy page"
 msgstr "Qoida sahifasi"
 
-#: hotel/models.py:272
+#: hotel/models.py:293
 msgid "Policy pages"
 msgstr "Qoida sahifalari"
 
-#: hotel/models.py:292
+#: hotel/models.py:313
 msgid "Contact message"
 msgstr "Aloqa xabari"
 
-#: hotel/models.py:293
+#: hotel/models.py:314
 msgid "Contact messages"
 msgstr "Aloqa xabarlari"
 
-#: hotel/models.py:307
-msgid "Per night. Currency is set in Site settings (UZS or USD)."
+#: hotel/models.py:328
+msgid "Per night. Currency is set in Site settings (UZS, USD, or EUR)."
 msgstr ""
 
-#: hotel/models.py:309 templates/hotel/room_detail.html:51
+#: hotel/models.py:330 templates/hotel/room_detail.html:51
 #: templates/hotel/rooms.html:35
 msgid "Capacity"
 msgstr "Sig'im"
 
-#: hotel/models.py:310
+#: hotel/models.py:331
 msgid "Size (m²)"
 msgstr "Maydon (m²)"
 
-#: hotel/models.py:317
+#: hotel/models.py:338
 msgid "Room types"
 msgstr "Xona turlari"
 
-#: hotel/models.py:335
+#: hotel/models.py:356
 msgid "Number"
 msgstr "Raqam"
 
-#: hotel/models.py:336 templates/hotel/partials/room_grid.html:20
+#: hotel/models.py:357 templates/hotel/partials/room_grid.html:20
 msgid "Floor"
 msgstr "Qavat"
 
-#: hotel/models.py:342 hotel/models.py:410 hotel/models.py:481
+#: hotel/models.py:363 hotel/models.py:431 hotel/models.py:516
 #: templates/hotel/partials/room_grid.html:16
 msgid "Room"
 msgstr "Xona"
 
-#: hotel/models.py:365
+#: hotel/models.py:386
 msgid "Primary"
 msgstr "Asosiy"
 
-#: hotel/models.py:369
+#: hotel/models.py:390
 msgid "Room image"
 msgstr "Xona rasmi"
 
-#: hotel/models.py:370
+#: hotel/models.py:391
 msgid "Room images"
 msgstr "Xona rasmlari"
 
-#: hotel/models.py:383 hotel/models.py:412
+#: hotel/models.py:404 hotel/models.py:433
 msgid "Start date"
 msgstr "Boshlanish sanasi"
 
-#: hotel/models.py:384 hotel/models.py:413
+#: hotel/models.py:405 hotel/models.py:434
 msgid "End date"
 msgstr "Tugash sanasi"
 
-#: hotel/models.py:386
+#: hotel/models.py:407
 msgid "Price"
 msgstr "Narx"
 
-#: hotel/models.py:389
+#: hotel/models.py:410
 msgid "Per night. Uses the currency from Site settings."
 msgstr ""
 
-#: hotel/models.py:394
+#: hotel/models.py:415
 msgid "Seasonal price"
 msgstr "Mavsumiy narx"
 
-#: hotel/models.py:395
+#: hotel/models.py:416
 msgid "Seasonal prices"
 msgstr "Mavsumiy narxlar"
 
-#: hotel/models.py:402 hotel/models.py:426
+#: hotel/models.py:423 hotel/models.py:447
 msgid "End date must be after start date."
 msgstr "Tugash sanasi boshlanish sanasidan keyin bo'lishi kerak."
 
-#: hotel/models.py:414
+#: hotel/models.py:435
 msgid "Reason"
 msgstr "Sabab"
 
-#: hotel/models.py:418
+#: hotel/models.py:439
 msgid "Blocked date"
 msgstr "Band sana"
 
-#: hotel/models.py:419
+#: hotel/models.py:440
 msgid "Blocked dates"
 msgstr "Band sanalar"
 
-#: hotel/models.py:431
+#: hotel/models.py:452
 msgid "Pending"
 msgstr "Kutilmoqda"
 
-#: hotel/models.py:432 templates/admin/index.html:31
+#: hotel/models.py:453 templates/admin/index.html:31
 #: templates/hotel/booking_success.html:10
 msgid "Confirmed"
 msgstr "Tasdiqlangan"
 
-#: hotel/models.py:433
+#: hotel/models.py:454
 msgid "Cancelled"
 msgstr "Bekor qilingan"
 
-#: hotel/models.py:434
+#: hotel/models.py:455
 msgid "Completed"
 msgstr "Yakunlangan"
 
-#: hotel/models.py:437
+#: hotel/models.py:458
 msgid "Reference code"
 msgstr "Bron kodi"
 
-#: hotel/models.py:447 templates/hotel/booking_success.html:26
+#: hotel/models.py:468 templates/hotel/booking_success.html:26
 msgid "Estimated total"
 msgstr "Taxminiy summa"
 
-#: hotel/models.py:452
+#: hotel/models.py:475
+msgid "Currency for this booking total (UZS, USD, or EUR)."
+msgstr ""
+
+#: hotel/models.py:480
 msgid "Internal notes"
 msgstr "Ichki izohlar"
 
-#: hotel/models.py:459 hotel/models.py:475
+#: hotel/models.py:487 hotel/models.py:510
 msgid "Booking"
 msgstr "Bron"
 
-#: hotel/models.py:467 hotel/services/booking.py:21 hotel/views.py:147
+#: hotel/models.py:502 hotel/services/booking.py:21 hotel/views.py:147
 msgid "Check-out must be after check-in."
 msgstr "Chiqish sanasi kirish sanasidan keyin bo'lishi kerak."
 
-#: hotel/models.py:483
+#: hotel/models.py:518
 msgid "Nightly rate"
 msgstr "Kunlik narx"
 
-#: hotel/models.py:487
+#: hotel/models.py:522
 msgid "Booking room"
 msgstr "Bron xonasi"
 
-#: hotel/models.py:488
+#: hotel/models.py:523
 msgid "Booking rooms"
 msgstr "Bron xonalari"
 
@@ -756,21 +776,38 @@ msgstr "Tanlangan xonalardan biri yoki bir nechtasi noto'g'ri."
 msgid "Room %(room)s is no longer available."
 msgstr "%(room)s xonasi endi mavjud emas."
 
-#: hotel/services/telegram.py:23
+#: hotel/services/telegram.py:45
 msgid "New booking"
 msgstr "Yangi bron"
 
-#: hotel/services/telegram.py:25
+#: hotel/services/telegram.py:47
 msgid "Reference"
 msgstr "Kod"
 
-#: hotel/services/telegram.py:32
+#: hotel/services/telegram.py:50
+#| msgid "Guest Reviews"
+msgid "Guest details"
+msgstr "Mehmon ma'lumotlari"
+
+#: hotel/services/telegram.py:59
 msgid "Nights"
 msgstr "Kechalar"
 
-#: hotel/services/telegram.py:34 templates/hotel/partials/price_summary.html:6
-msgid "Total"
-msgstr "Jami"
+#: hotel/services/telegram.py:78
+msgid "Open admin to confirm or update this booking."
+msgstr "Bronni tasdiqlash yoki o‘zgartirish uchun admin’ni oching."
+
+#: hotel/utils/currency.py:10
+msgid "UZS (so'm)"
+msgstr ""
+
+#: hotel/utils/currency.py:11
+msgid "USD ($)"
+msgstr ""
+
+#: hotel/utils/currency.py:12
+msgid "EUR (€)"
+msgstr ""
 
 #: hotel/views.py:74 templates/admin/index.html:11 templates/base.html:82
 #: templates/base.html:99
@@ -1230,7 +1267,6 @@ msgstr ""
 "onlayn bron qiling."
 
 #: templates/hotel/rooms.html:16
-#| msgid "Choose the perfect room for your stay."
 msgid "Choose the perfect room for your stay at Aida Hotel Bukhara."
 msgstr "Aida Hotel Buxoroda o'zingizga mos xonani tanlang."
 
@@ -1251,6 +1287,9 @@ msgstr "Hozircha bo'sh xonalar yo'q."
 #: templates/partials/language_switcher.html:4
 msgid "Language"
 msgstr "Til"
+
+#~ msgid "Group or channel chat ID, e.g. -1001234567890"
+#~ msgstr "Guruh yoki kanal chat ID, masalan -1001234567890"
 
 #~ msgid "Our Rooms & Suites"
 #~ msgstr "Xonalar va syyutlar"

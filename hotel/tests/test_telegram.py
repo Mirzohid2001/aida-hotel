@@ -39,6 +39,9 @@ class TelegramServiceTests(TestCase):
         self.assertIn("Ali Valiyev", message)
         self.assertIn("301", message)
         self.assertIn("Late check-in", message)
+        self.assertIn("<code>", message)
+        self.assertIn("tel:+998901112233", message)
+        self.assertIn("mailto:ali@example.com", message)
 
     @patch("hotel.services.telegram.urllib.request.urlopen")
     def test_send_telegram_message_success(self, mock_urlopen):
