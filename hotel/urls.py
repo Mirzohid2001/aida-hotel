@@ -12,5 +12,6 @@ urlpatterns = [
     path("book/availability/", views.booking_availability, name="booking_availability"),
     path("book/success/<str:reference>/", views.booking_success, name="booking_success"),
     path("contact/", views.contact, name="contact"),
+    path("reviews/submit/", views.submit_review, name="submit_review"),
     path("policy/<slug:slug>/", views.policy, name="policy"),
 ]

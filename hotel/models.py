@@ -203,14 +203,30 @@ class GalleryImage(OptimizeImagesMixin, models.Model):
 
 
 class Testimonial(models.Model):
+    class Source(models.TextChoices):
+        ADMIN = "admin", _("Admin")
+        GUEST = "guest", _("Guest form")
+
     guest_name = models.CharField(_("Guest name"), max_length=120)
+    email = models.EmailField(_("Email"), blank=True)
     content = models.TextField(_("Content"))
     rating = models.PositiveSmallIntegerField(_("Rating"), default=5)
     ordering = models.PositiveIntegerField(_("Ordering"), default=0)
-    is_active = models.BooleanField(_("Active"), default=True)
+    is_active = models.BooleanField(
+        _("Published"),
+        default=True,
+        help_text=_("Only published reviews appear on the website carousel. Guest submissions start unpublished."),
+    )
+    source = models.CharField(
+        _("Source"),
+        max_length=16,
+        choices=Source.choices,
+        default=Source.ADMIN,
+    )
+    created_at = models.DateTimeField(_("Created at"), auto_now_add=True)
 
     class Meta:
-        ordering = ["ordering", "id"]
+        ordering = ["ordering", "-created_at", "id"]
         verbose_name = _("Testimonial")
         verbose_name_plural = _("Testimonials")
 

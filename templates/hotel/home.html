@@ -171,28 +171,82 @@
 </section>
 {% endif %}
 
-{% if testimonials %}
-<section class="section section--dark reveal">
+<section id="reviews" class="section section--dark reveal">
   <div class="container">
     <div class="section-header">
       <span class="section-eyebrow">{% trans "Testimonials" %}</span>
       <h2>{% trans "Guest Reviews" %}</h2>
       <p>{% trans "What our distinguished guests say about their stay." %}</p>
     </div>
-    <div class="testimonials-grid">
-      {% for t in testimonials %}
-      <blockquote class="testimonial-card">
-        <div class="testimonial-stars" aria-label="{% trans 'Rating' %}: {{ t.rating }}/5">
-          {% for i in "12345" %}{% if forloop.counter <= t.rating %}&#9733;{% else %}&#9734;{% endif %}{% endfor %}
+
+    {% if testimonials %}
+    <div class="reviews-carousel" data-reviews-carousel aria-roledescription="carousel" aria-label="{% trans 'Guest Reviews' %}">
+      <div class="reviews-carousel-track">
+        {% for t in testimonials %}
+        <blockquote class="testimonial-card reviews-slide{% if forloop.first %} is-active{% endif %}" data-review-slide {% if not forloop.first %}hidden{% endif %}>
+          <div class="testimonial-stars" aria-label="{% trans 'Rating' %}: {{ t.rating }}/5">
+            {% for i in "12345" %}{% if forloop.counter <= t.rating %}&#9733;{% else %}&#9734;{% endif %}{% endfor %}
+          </div>
+          <p>“{{ t.content }}”</p>
+          <footer>{{ t.guest_name }}</footer>
+        </blockquote>
+        {% endfor %}
+      </div>
+      {% if testimonials|length > 1 %}
+      <div class="reviews-carousel-nav">
+        <button type="button" class="reviews-nav-btn" data-review-prev aria-label="{% trans 'Previous review' %}">‹</button>
+        <div class="reviews-dots" data-review-dots>
+          {% for t in testimonials %}
+          <button type="button" class="reviews-dot{% if forloop.first %} is-active{% endif %}" data-review-dot="{{ forloop.counter0 }}" aria-label="{% blocktrans with n=forloop.counter %}Review {{ n }}{% endblocktrans %}"></button>
+          {% endfor %}
         </div>
-        <p>"{{ t.content }}"</p>
-        <footer>{{ t.guest_name }}</footer>
-      </blockquote>
-      {% endfor %}
+        <button type="button" class="reviews-nav-btn" data-review-next aria-label="{% trans 'Next review' %}">›</button>
+      </div>
+      {% endif %}
+    </div>
+    {% else %}
+    <p class="reviews-empty">{% trans "Be the first to share your experience." %}</p>
+    {% endif %}
+
+    <div class="review-form-wrap{% if show_review_form or review_form.errors %} is-open{% endif %}">
+      <div class="review-form-intro">
+        <h3>{% trans "Write a review" %}</h3>
+        <p>{% trans "Your review will be published after a short moderation check." %}</p>
+      </div>
+      <form method="post" action="{% url 'hotel:submit_review' %}" class="review-form contact-form" data-js-review>
+        {% csrf_token %}
+        {{ review_form.website }}
+        {{ review_form.form_ts }}
+        {% if review_form.non_field_errors %}
+        <div class="form-errors">{{ review_form.non_field_errors }}</div>
+        {% endif %}
+        <div class="form-row form-row--2">
+          <label>
+            <span>{{ review_form.guest_name.label }}</span>
+            {{ review_form.guest_name }}
+            {{ review_form.guest_name.errors }}
+          </label>
+          <label>
+            <span>{{ review_form.email.label }}</span>
+            {{ review_form.email }}
+            {{ review_form.email.errors }}
+          </label>
+        </div>
+        <label>
+          <span>{{ review_form.rating.label }}</span>
+          {{ review_form.rating }}
+          {{ review_form.rating.errors }}
+        </label>
+        <label>
+          <span>{{ review_form.content.label }}</span>
+          {{ review_form.content }}
+          {{ review_form.content.errors }}
+        </label>
+        <button type="submit" class="btn btn-gold" data-submit-btn>{% trans "Submit review" %}</button>
+      </form>
     </div>
   </div>
 </section>
-{% endif %}
 
 {% if nearby_places %}
 <section class="section reveal">

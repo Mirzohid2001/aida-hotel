@@ -199,12 +199,22 @@ class GalleryImageAdmin(OrderedActiveAdmin):
 
 @admin.register(Testimonial)
 class TestimonialAdmin(OrderedActiveAdmin):
-    list_display = ("guest_name", "stars", "ordering", "is_active")
-    search_fields = ("guest_name", "content")
-    list_filter = ("is_active", "rating")
+    list_display = ("guest_name", "stars", "source", "ordering", "is_active", "created_at")
+    search_fields = ("guest_name", "email", "content")
+    list_filter = ("is_active", "source", "rating", "created_at")
+    readonly_fields = ("created_at",)
+    actions = ("publish_reviews", "unpublish_reviews")
     fieldsets = (
-        (None, {"fields": ("guest_name", "content", "rating")}),
-        (_("Display"), {"fields": ("ordering", "is_active")}),
+        (None, {"fields": ("guest_name", "email", "content", "rating")}),
+        (
+            _("Moderation"),
+            {
+                "fields": ("is_active", "source", "ordering", "created_at"),
+                "description": _(
+                    "Guest form reviews are unpublished until you tick Published."
+                ),
+            },
+        ),
     )
 
     @admin.display(description=_("Rating"), ordering="rating")
@@ -212,6 +222,24 @@ class TestimonialAdmin(OrderedActiveAdmin):
         filled = "★" * int(obj.rating or 0)
         empty = "☆" * max(0, 5 - int(obj.rating or 0))
         return format_html('<span class="aida-stars">{}{}</span>', filled, empty)
+
+    @admin.action(description=_("Publish selected reviews"))
+    def publish_reviews(self, request, queryset):
+        updated = queryset.update(is_active=True)
+        self.message_user(
+            request,
+            _("%(count)d review(s) published.") % {"count": updated},
+            messages.SUCCESS,
+        )
+
+    @admin.action(description=_("Unpublish selected reviews"))
+    def unpublish_reviews(self, request, queryset):
+        updated = queryset.update(is_active=False)
+        self.message_user(
+            request,
+            _("%(count)d review(s) unpublished.") % {"count": updated},
+            messages.WARNING,
+        )
 
 
 @admin.register(FAQ)

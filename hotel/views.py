@@ -10,7 +10,7 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.translation import check_for_language, gettext as _
 from django.views.decorators.http import require_GET, require_http_methods
 
-from hotel.forms import BookingForm, ContactForm
+from hotel.forms import BookingForm, ContactForm, ReviewForm
 from hotel.models import (
     AboutSection,
     Amenity,
@@ -31,6 +31,11 @@ from hotel.services.booking import BookingError, create_booking
 from hotel.services.pricing import calculate_booking_total, calculate_nights
 
 
+def _client_ip(request) -> str:
+    forwarded = (request.META.get("HTTP_X_FORWARDED_FOR") or "").split(",")[0].strip()
+    return forwarded or request.META.get("REMOTE_ADDR") or "unknown"
+
+
 def home(request):
     faqs = FAQ.objects.filter(is_active=True)
     faq_payload = faq_json_ld(faqs)
@@ -39,7 +44,8 @@ def home(request):
         "about": AboutSection.load(),
         "amenities": Amenity.objects.filter(is_active=True),
         "gallery": GalleryImage.objects.filter(is_active=True)[:8],
-        "testimonials": Testimonial.objects.filter(is_active=True)[:6],
+        "testimonials": Testimonial.objects.filter(is_active=True)[:12],
+        "review_form": ReviewForm(client_ip=_client_ip(request)),
         "faqs": faqs,
         "stats": StatHighlight.objects.filter(is_active=True),
         "nearby_places": NearbyPlace.objects.filter(is_active=True),
@@ -49,6 +55,43 @@ def home(request):
         ),
     }
     return render(request, "hotel/home.html", context)
+
+
+@require_http_methods(["POST"])
+def submit_review(request):
+    form = ReviewForm(request.POST, client_ip=_client_ip(request))
+    if form.is_valid():
+        form.save()
+        messages.success(
+            request,
+            _("Thank you! Your review was submitted and will appear after moderation."),
+        )
+        return redirect(f"{reverse('hotel:home')}#reviews")
+    messages.error(request, _("Could not submit the review. Please check the form and try again."))
+    # Re-render home with errors
+    faqs = FAQ.objects.filter(is_active=True)
+    faq_payload = faq_json_ld(faqs)
+    return render(
+        request,
+        "hotel/home.html",
+        {
+            "hero_slides": HeroSlide.objects.filter(is_active=True),
+            "about": AboutSection.load(),
+            "amenities": Amenity.objects.filter(is_active=True),
+            "gallery": GalleryImage.objects.filter(is_active=True)[:8],
+            "testimonials": Testimonial.objects.filter(is_active=True)[:12],
+            "review_form": form,
+            "faqs": faqs,
+            "stats": StatHighlight.objects.filter(is_active=True),
+            "nearby_places": NearbyPlace.objects.filter(is_active=True),
+            "room_types": RoomType.objects.filter(is_active=True).prefetch_related("images", "rooms")[:3],
+            "seo_faq_jsonld": (
+                json.dumps(faq_payload, ensure_ascii=False, separators=(",", ":")) if faq_payload else ""
+            ),
+            "show_review_form": True,
+        },
+        status=400,
+    )
 
 
 def rooms(request):

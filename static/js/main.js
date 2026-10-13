@@ -338,7 +338,7 @@
   }
 
   function initSubmitLoading() {
-    document.querySelectorAll('form[data-js-booking], form[data-js-contact]').forEach((form) => {
+    document.querySelectorAll('form[data-js-booking], form[data-js-contact], form[data-js-review]').forEach((form) => {
       form.addEventListener('submit', () => {
         const btn = form.querySelector('[data-submit-btn]');
         if (!btn || btn.classList.contains('is-loading')) return;
@@ -346,6 +346,46 @@
         btn.disabled = true;
       });
     });
+  }
+
+  function initReviewsCarousel() {
+    const root = document.querySelector('[data-reviews-carousel]');
+    if (!root) return;
+    const slides = Array.from(root.querySelectorAll('[data-review-slide]'));
+    if (slides.length < 2) return;
+    const dots = Array.from(root.querySelectorAll('[data-review-dot]'));
+    const prev = root.querySelector('[data-review-prev]');
+    const next = root.querySelector('[data-review-next]');
+    let index = 0;
+    let timer;
+
+    const show = (i) => {
+      index = (i + slides.length) % slides.length;
+      slides.forEach((slide, n) => {
+        const active = n === index;
+        slide.hidden = !active;
+        slide.classList.toggle('is-active', active);
+      });
+      dots.forEach((dot, n) => dot.classList.toggle('is-active', n === index));
+    };
+
+    const restart = () => {
+      clearInterval(timer);
+      timer = setInterval(() => show(index + 1), 5500);
+    };
+
+    prev?.addEventListener('click', () => { show(index - 1); restart(); });
+    next?.addEventListener('click', () => { show(index + 1); restart(); });
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        show(parseInt(dot.dataset.reviewDot || '0', 10));
+        restart();
+      });
+    });
+
+    root.addEventListener('mouseenter', () => clearInterval(timer));
+    root.addEventListener('mouseleave', restart);
+    restart();
   }
 
   function initActiveNav() {
@@ -372,6 +412,7 @@
     initRoomSelection();
     initBookingDates();
     initSubmitLoading();
+    initReviewsCarousel();
     initActiveNav();
   });
 })();
