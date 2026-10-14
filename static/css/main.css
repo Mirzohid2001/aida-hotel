@@ -1325,6 +1325,39 @@ body.has-promo-banner .site-header { top: 44px; }
   gap: 1rem;
 }
 
+.review-form label {
+  display: block;
+  margin-bottom: 1.1rem;
+  color: var(--black);
+}
+
+.review-form label > span {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #3a342e;
+  margin-bottom: 0.45rem;
+}
+
+.review-form .form-control {
+  color: var(--black);
+  background: var(--ivory);
+}
+
+.review-form .form-control::placeholder {
+  color: #7a736c;
+  opacity: 1;
+}
+
+.review-form .errorlist,
+.review-form .form-errors {
+  color: #8b1e1e;
+  font-size: 0.85rem;
+  margin: 0.35rem 0 0;
+}
+
 @media (max-width: 640px) {
   .review-form .form-row--2 {
     grid-template-columns: 1fr;
