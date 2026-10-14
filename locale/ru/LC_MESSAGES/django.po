@@ -70,7 +70,6 @@ msgid "Contact"
 msgstr "Контакты"
 
 #: hotel/admin.py:95
-#, fuzzy
 #| msgid "Price"
 msgid "Pricing"
 msgstr "Цена"
@@ -128,7 +127,6 @@ msgid "Image"
 msgstr "Изображение"
 
 #: hotel/admin.py:210
-#, fuzzy
 #| msgid "Information"
 msgid "Moderation"
 msgstr "Информация"
@@ -381,7 +379,6 @@ msgid "Share your experience at Aida Hotel…"
 msgstr "Поделитесь впечатлениями об Aida Hotel…"
 
 #: hotel/forms.py:177
-#, fuzzy
 #| msgid "Please select dates."
 msgid "Please enter your name."
 msgstr "Выберите даты."
@@ -1292,18 +1289,20 @@ msgstr "Следующий отзыв"
 msgid "Be the first to share your experience."
 msgstr "Будьте первым, кто поделится впечатлениями."
 
-#: templates/hotel/home.html:213
+msgid "Share your stay"
+msgstr "Поделитесь впечатлениями"
+
 msgid "Write a review"
 msgstr "Написать отзыв"
 
-#: templates/hotel/home.html:214
 msgid "Your review will be published after a short moderation check."
 msgstr "Ваш отзыв появится на сайте после короткой проверки."
 
-#: templates/hotel/home.html:245
-#| msgid "Guest Reviews"
 msgid "Submit review"
 msgstr "Отправить отзыв"
+
+msgid "Cancel"
+msgstr "Отмена"
 
 #: templates/hotel/home.html:256
 msgid "Nearby"

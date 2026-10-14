@@ -70,7 +70,6 @@ msgid "Contact"
 msgstr "Aloqa"
 
 #: hotel/admin.py:95
-#, fuzzy
 #| msgid "Price"
 msgid "Pricing"
 msgstr "Narx"
@@ -128,7 +127,6 @@ msgid "Image"
 msgstr "Rasm"
 
 #: hotel/admin.py:210
-#, fuzzy
 #| msgid "Information"
 msgid "Moderation"
 msgstr "Ma'lumot"
@@ -381,7 +379,6 @@ msgid "Share your experience at Aida Hotel…"
 msgstr "Aida Hotel’dagi tajribangizni yozing…"
 
 #: hotel/forms.py:177
-#, fuzzy
 #| msgid "Please select dates."
 msgid "Please enter your name."
 msgstr "Sanalarni tanlang."
@@ -1292,18 +1289,20 @@ msgstr "Keyingi otziv"
 msgid "Be the first to share your experience."
 msgstr "Tajribangizni birinchi bo‘lib ulashing."
 
-#: templates/hotel/home.html:213
+msgid "Share your stay"
+msgstr "Qolishingizni ulashing"
+
 msgid "Write a review"
 msgstr "Otziv yozing"
 
-#: templates/hotel/home.html:214
 msgid "Your review will be published after a short moderation check."
 msgstr "Otzivingiz qisqa tekshiruvdan keyin saytda chiqadi."
 
-#: templates/hotel/home.html:245
-#| msgid "Guest Reviews"
 msgid "Submit review"
 msgstr "Otzivni yuborish"
+
+msgid "Cancel"
+msgstr "Bekor qilish"
 
 #: templates/hotel/home.html:256
 msgid "Nearby"

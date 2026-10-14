@@ -388,6 +388,31 @@
     restart();
   }
 
+  function initReviewFormToggle() {
+    const root = document.querySelector('[data-review-compose]');
+    if (!root) return;
+    const panel = root.querySelector('[data-review-panel]');
+    const openBtn = root.querySelector('[data-review-open]');
+    const closeBtn = root.querySelector('[data-review-close]');
+    if (!panel || !openBtn) return;
+
+    const setOpen = (open) => {
+      panel.hidden = !open;
+      panel.classList.toggle('is-open', open);
+      openBtn.classList.toggle('is-hidden', open);
+      openBtn.setAttribute('aria-expanded', String(open));
+      if (open) {
+        const first = panel.querySelector('input.form-control, select.form-control, textarea.form-control');
+        first?.focus();
+      } else {
+        openBtn.focus();
+      }
+    };
+
+    openBtn.addEventListener('click', () => setOpen(true));
+    closeBtn?.addEventListener('click', () => setOpen(false));
+  }
+
   function initActiveNav() {
     const path = window.location.pathname.replace(/\/$/, '') || '/';
     document.querySelectorAll('.main-nav a, .mobile-nav a').forEach((link) => {
@@ -413,6 +438,7 @@
     initBookingDates();
     initSubmitLoading();
     initReviewsCarousel();
+    initReviewFormToggle();
     initActiveNav();
   });
 })();

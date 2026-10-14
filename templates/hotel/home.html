@@ -208,43 +208,66 @@
     <p class="reviews-empty">{% trans "Be the first to share your experience." %}</p>
     {% endif %}
 
-    <div class="review-form-wrap{% if show_review_form or review_form.errors %} is-open{% endif %}">
-      <div class="review-form-intro">
-        <h3>{% trans "Write a review" %}</h3>
-        <p>{% trans "Your review will be published after a short moderation check." %}</p>
-      </div>
-      <form method="post" action="{% url 'hotel:submit_review' %}" class="review-form contact-form" data-js-review>
-        {% csrf_token %}
-        {{ review_form.website }}
-        {{ review_form.form_ts }}
-        {% if review_form.non_field_errors %}
-        <div class="form-errors">{{ review_form.non_field_errors }}</div>
-        {% endif %}
-        <div class="form-row form-row--2">
-          <label>
-            <span>{{ review_form.guest_name.label }}</span>
-            {{ review_form.guest_name }}
-            {{ review_form.guest_name.errors }}
-          </label>
-          <label>
-            <span>{{ review_form.email.label }}</span>
-            {{ review_form.email }}
-            {{ review_form.email.errors }}
-          </label>
+    {% with form_open=show_review_form|default:False %}
+    <div class="review-compose" data-review-compose>
+      <button
+        type="button"
+        class="btn btn-outline-light review-compose-toggle{% if form_open or review_form.errors or not testimonials %} is-hidden{% endif %}"
+        data-review-open
+        aria-expanded="{% if form_open or review_form.errors or not testimonials %}true{% else %}false{% endif %}"
+        aria-controls="review-form-panel">
+        {% trans "Write a review" %}
+      </button>
+
+      <div
+        id="review-form-panel"
+        class="review-form-wrap{% if form_open or review_form.errors or not testimonials %} is-open{% endif %}"
+        data-review-panel
+        {% if not form_open and not review_form.errors and testimonials %}hidden{% endif %}>
+        <div class="review-form-intro">
+          <span class="review-form-kicker">{% trans "Share your stay" %}</span>
+          <h3>{% trans "Write a review" %}</h3>
+          <p>{% trans "Your review will be published after a short moderation check." %}</p>
         </div>
-        <label>
-          <span>{{ review_form.rating.label }}</span>
-          {{ review_form.rating }}
-          {{ review_form.rating.errors }}
-        </label>
-        <label>
-          <span>{{ review_form.content.label }}</span>
-          {{ review_form.content }}
-          {{ review_form.content.errors }}
-        </label>
-        <button type="submit" class="btn btn-gold" data-submit-btn>{% trans "Submit review" %}</button>
-      </form>
+        <form method="post" action="{% url 'hotel:submit_review' %}" class="review-form" data-js-review>
+          {% csrf_token %}
+          {{ review_form.website }}
+          {{ review_form.form_ts }}
+          {% if review_form.non_field_errors %}
+          <div class="form-errors">{{ review_form.non_field_errors }}</div>
+          {% endif %}
+          <div class="form-row form-row--2">
+            <label>
+              <span>{{ review_form.guest_name.label }}</span>
+              {{ review_form.guest_name }}
+              {{ review_form.guest_name.errors }}
+            </label>
+            <label>
+              <span>{{ review_form.email.label }}</span>
+              {{ review_form.email }}
+              {{ review_form.email.errors }}
+            </label>
+          </div>
+          <label class="review-form-rating">
+            <span>{{ review_form.rating.label }}</span>
+            {{ review_form.rating }}
+            {{ review_form.rating.errors }}
+          </label>
+          <label>
+            <span>{{ review_form.content.label }}</span>
+            {{ review_form.content }}
+            {{ review_form.content.errors }}
+          </label>
+          <div class="review-form-actions">
+            <button type="submit" class="btn btn-gold" data-submit-btn>{% trans "Submit review" %}</button>
+            {% if testimonials %}
+            <button type="button" class="review-form-cancel" data-review-close>{% trans "Cancel" %}</button>
+            {% endif %}
+          </div>
+        </form>
+      </div>
     </div>
+    {% endwith %}
   </div>
 </section>
 
